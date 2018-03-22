@@ -1,0 +1,14 @@
+# Setting up Firewall BEGIN------------------
+
+- name: Copy Firewall settings script
+  copy: src=iptables.sh dest=/root/iptables.sh mode=0700
+  
+- name: Make Firewall start at boot
+  template: src=firewall_on.sh dest=/etc/network/if-pre-up.d/firewall_on.sh mode=0777
+
+- name: Apply Firewall settings
+  command: /root/iptables.sh
+
+# Setting up Firewall END -------------------
+
+# https://askubuntu.com/questions/119393/how-to-save-rules-of-the-iptables
