@@ -1,10 +1,17 @@
 # Setting up Firewall BEGIN------------------
 
 - name: Copy Firewall settings script
-  copy: src=iptables.sh dest=/root/iptables.sh mode=0700
+  copy: src=iptables.sh dest=/root/iptables.sh mode=0777
   
-- name: Make Firewall start at boot
-  copy: src=firewall_on.sh dest=/etc/network/if-pre-up.d/firewall_on.sh mode=0777
+#- name: Make Firewall start at boot
+#  copy: src=firewall_on.sh dest=/etc/network/if-pre-up.d/firewall_on.sh mode=0777
+
+- lineinfile:
+    dest: "/etc/rc.local"
+    regexp: '^(local[\s]+all[\s]+postgres[\s]+)peer([\s]*)$'
+    insertafter='^#.This.script*$' 
+    line: '/root/iptables.sh'
+
 
 - name: Apply Firewall settings
   command: /root/iptables.sh
