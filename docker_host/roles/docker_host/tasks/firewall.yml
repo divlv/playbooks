@@ -4,7 +4,7 @@
   copy: src=iptables.sh dest=/root/iptables.sh mode=0700
   
 - name: Make Firewall start at boot
-  template: src=firewall_on.sh dest=/etc/network/if-pre-up.d/firewall_on.sh mode=0777
+  copy: src=firewall_on.sh dest=/etc/network/if-pre-up.d/firewall_on.sh mode=0777
 
 - name: Apply Firewall settings
   command: /root/iptables.sh
