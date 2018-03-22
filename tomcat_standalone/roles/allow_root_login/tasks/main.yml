@@ -1,0 +1,10 @@
+# Workaround for Hetzner/Azure/AWS and others who don't allow ROOT at once:
+# 1-st time it allows to login only as "ubuntu" (or other not root) user.
+# It needs just overwrite "authorized_keys" file for root user - to allow remote root login.
+# 
+# For this special task, we must use "remote_user = {raw_linux_user}" to force login as "{raw_linux_user}" this time
+
+- name: Allow ROOT login
+  command: cp /home/ubuntu/.ssh/authorized_keys /root/.ssh/authorized_keys
+  become: true
+  become_user: root

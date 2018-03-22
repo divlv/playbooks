@@ -1,0 +1,119 @@
+---
+
+- name: TomCat -=- Download from tomcat.apache.org
+  get_url: url="http://www-eu.apache.org/dist/tomcat/tomcat-7/v7.0.85/bin/{{ tomcat_archive }}.zip" dest="{{ tomcat_download_dir }}/{{ tomcat_archive }}.zip"
+  
+  
+- name: TomCat -=- Extract archive
+  command: chdir={{ tomcat_download_dir }} unzip -q {{ tomcat_download_dir }}/{{ tomcat_archive }}.zip creates={{ tomcat_work_dir }}
+
+  # Rename the dir to avoid encoding the version in the init script
+- name: TomCat -=- Rename install directory
+  command: chdir=/usr/share mv wildfly-10.1.0.Final jboss-as creates=/usr/share/jboss-as
+
+- name: TomCat -=- Add group
+  group: name={{ tomcat_group }}
+
+- name: TomCat -=- Add user
+  user: name={{ tomcat_user }} group={{ tomcat_group }} home={{ tomcat_work_dir }} shell=/bin/false
+  
+
+
+222222222222222222222222222
+
+  
+- name: TomCat -=- Copying standalone.xml configuration file
+  template: src=standalone.xml dest={{ wildfly_work_dir }}/standalone/configuration/ owner={{ tomcat_user }} group={{ tomcat_group }}
+
+- name: TomCat -=- Change ownership of TomCat installation
+  file: path=/usr/share/jboss-as/ owner={{ tomcat_user }} group={{ tomcat_group }} state=directory recurse=yes
+
+- name: TomCat -=- Copy global config
+  copy: src=wildfly dest=/etc/default/{{ wildfly_service_name }} group=root owner=root mode=0644
+
+- name: TomCat -=- Copy the init script
+  copy: src=wildfly-init-debian.sh dest=/etc/init.d/{{ wildfly_service_name }} group=root owner=root mode=0755
+
+- name: TomCat -=- Enable to be started at boot (step 1 of 2)
+  command: update-rc.d wildfly defaults
+
+- name: TomCat -=- Enable to be started at boot (step 2 of 2)
+  command: update-rc.d wildfly enable
+
+  
+- name: TomCat -=- Create directory for GELF Logging module
+  file: 
+   dest: "{{ wildfly_work_dir }}/modules/system/layers/base/biz/paluch/logging/main"
+   owner: "{{ tomcat_user }}"
+   group: "{{ tomcat_group }}"
+   mode: 0755
+   recurse: yes
+   state: directory
+  
+- name: TomCat -=- Copy GELF Logging files (step 1 of 4)
+  copy: src=gelf/module.xml dest={{ wildfly_work_dir }}/modules/system/layers/base/biz/paluch/logging/main group={{ tomcat_group }} owner={{ tomcat_user }} mode=0644
+  
+- name: TomCat -=- Copy GELF Logging files (step 2 of 4)
+  copy: src=gelf/logstash-gelf-1.11.2.jar dest={{ wildfly_work_dir }}/modules/system/layers/base/biz/paluch/logging/main group={{ tomcat_group }} owner={{ tomcat_user }} mode=0644
+  
+- name: TomCat -=- Copy GELF Logging files (step 3 of 4)
+  copy: src=gelf/commons-pool2-2.4.3.jar dest={{ wildfly_work_dir }}/modules/system/layers/base/biz/paluch/logging/main group={{ tomcat_group }} owner={{ tomcat_user }} mode=0644
+  
+- name: TomCat -=- Copy GELF Logging files (step 4 of 4)
+  copy: src=gelf/jedis-2.9.0.jar dest={{ wildfly_work_dir }}/modules/system/layers/base/biz/paluch/logging/main group={{ tomcat_group }} owner={{ tomcat_user }} mode=0644
+  
+  
+- name: TomCat -=- Create directory for PostgreSQL driver
+  file: 
+   dest: "{{ wildfly_work_dir }}/modules/org/postgresql/main"
+   owner: "{{ tomcat_user }}"
+   group: "{{ tomcat_group }}"
+   mode: 0755
+   recurse: yes
+   state: directory
+  
+- name: TomCat -=- Copy PostgreSQL driver (step 1 of 2)
+  copy: src=postgresql/module.xml dest={{ wildfly_work_dir }}/modules/org/postgresql/main group={{ tomcat_group }} owner={{ tomcat_user }} mode=0644
+  
+- name: TomCat -=- Copy PostgreSQL driver (step 2 of 2)
+  copy: src=postgresql/postgresql-42.1.4.jar dest={{ wildfly_work_dir }}/modules/org/postgresql/main group={{ tomcat_group }} owner={{ tomcat_user }} mode=0644
+
+- name: TomCat -=- Delete old LOG directory, if exists
+  file:
+    state: absent
+    dest: "/usr/share/jboss-as/standalone/log/"
+  
+- name: TomCat -=- Create LOG directory with appropriate access rights
+  file: path=/usr/share/jboss-as/standalone/log
+        state=directory
+        mode=0775
+        owner={{ tomcat_user }}
+        group={{ tomcat_group }}
+
+- name: TomCat -=- Create symbolic link to Standalone Logs dir
+  file:
+    src: /usr/share/jboss-as/standalone/log
+    dest: /z_wildfly_log
+    state: link    
+
+- debug:
+    msg: "TomCat -=- Adjust XMS memory settings"
+        
+- name: sed
+  command: sed -i 's/-Xms64m/-Xms2048m/g' "{{ wildfly_work_dir }}/bin/standalone.conf"
+
+
+- debug:
+    msg: "TomCat -=- Adjust XMX memory settings"
+        
+- name: sed
+  command: sed -i 's/-Xmx512m/-Xmx2048m/g' "{{ wildfly_work_dir }}/bin/standalone.conf"
+        
+   
+- debug:
+    msg: "TomCat -=- Adjust Wildfly timezone"
+        
+   
+- name: sed
+  command: sed -i 's/-Xms2048m/-Duser.timezone=Europe\/Riga -Xms2048m/g' "{{ wildfly_work_dir }}/bin/standalone.conf"
+   

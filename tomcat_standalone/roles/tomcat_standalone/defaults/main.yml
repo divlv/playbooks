@@ -1,0 +1,21 @@
+---
+#
+#######################
+# defaults file for tomcat
+# apache-tomcat-7.0.54
+tomcat_version: 7.0.85
+tomcat_archive: "apache-tomcat-{{ tomcat_version }}"
+
+tomcat_user: tomcat
+tomcat_group: tomcat
+tomcat_service_name: tomcat
+
+tomcat_download_dir: /tmp
+
+# Max POST size = 32Mb
+tomcat_max_data_to_receive: 32000000
+
+tomcat_work_dir: /opt/tomcat
+tomcat_admin_login: "dima"
+tomcat_admin_password: "05alus"
+#
