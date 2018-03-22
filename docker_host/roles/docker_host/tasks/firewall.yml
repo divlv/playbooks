@@ -6,6 +6,7 @@
 #- name: Make Firewall start at boot
 #  copy: src=firewall_on.sh dest=/etc/network/if-pre-up.d/firewall_on.sh mode=0777
 
+# Some Systems doesn't start "if-pre-up.d" scriptsa as expected, so use the following:
 - debug:
     msg: "Place Firewall startup script into /etc/rc.local"
     
