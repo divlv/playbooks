@@ -9,7 +9,7 @@
 - lineinfile:
     dest: "/etc/rc.local"
     regexp: '^(local[\s]+all[\s]+postgres[\s]+)peer([\s]*)$'
-    insertafter='^#.This.script*$' 
+    insertafter: '^#.This.script*$' 
     line: '/root/iptables.sh'
 
 
