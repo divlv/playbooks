@@ -4,6 +4,25 @@
   get_url: url="http://www-eu.apache.org/dist/tomcat/tomcat-7/v7.0.85/bin/{{ tomcat_archive }}.zip" dest="{{ tomcat_download_dir }}/{{ tomcat_archive }}.zip"
 
 - name: TomCat -=- Extract archive
-  command: chdir={{ tomcat_download_dir }} unzip -q {{ tomcat_download_dir }}/{{ tomcat_archive }}.zip
+  command: chdir=/opt unzip -q {{ tomcat_download_dir }}/{{ tomcat_archive }}.zip
 
- 
+ - name: TomCat -=- Create symbolic link to installation dir
+  file:
+    src: "/opt/{{ tomcat_archive }}"
+    dest: {{ tomcat_work_dir }}
+    state: link
+
+- name: TomCat -=- Create tomcat init script
+  template: src=tomcat.sh dest=/etc/init.d/tomcat owner=root group=root mode=0766
+
+- name: TomCat -=- Set file permissions
+  file: path="/opt/{{ tomcat_archive }}" owner={{ tomcat_user }} group=tomcat recurse=yes
+  
+- name: TomCat -=- Configure server
+  template: src=server.xml.7 dest={{ catalina_home }}/conf/server.xml backup=yes
+
+- name: TomCat -=- Configure users
+  template: src=tomcat-users.xml dest={{ catalina_home }}/conf/
+
+- name: TomCat -=- Start service
+  shell: /etc/init.d/tomcat start
