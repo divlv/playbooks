@@ -32,8 +32,8 @@
   file: path={{ tomcat_real_work_dir }} owner={{ tomcat_user }} group=tomcat recurse=yes
 
 - name: TomCat -=- Permissions for executable files
-   shell: 'chmod 766 {{ tomcat_real_work_dir }}/bin/*.sh'  
-  
+  shell: "chmod 766 {{ tomcat_real_work_dir }}/bin/*.sh"
+
 - name: TomCat -=- Configure server
   template: src=server.xml.7 dest="{{ catalina_home }}/conf/server.xml" backup=yes
 
