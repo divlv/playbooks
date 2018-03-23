@@ -4,5 +4,5 @@
 - include: java8.yml
 - include: tomcat.yml
 #- include: firewall.yml
-- include: reboot.yml
+#- include: reboot.yml
 #
