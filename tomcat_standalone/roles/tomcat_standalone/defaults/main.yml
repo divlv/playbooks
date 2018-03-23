@@ -36,5 +36,5 @@ manager_user: admin
 manager_password: admin
 
 # WWW
-full_server_name: my.v1.lv
+full_server_name: tomcat.v1.lv
 #
