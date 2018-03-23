@@ -1,0 +1,6 @@
+#!/bin/bash
+
+service tomcat restart
+
+service haproxy restart
+
