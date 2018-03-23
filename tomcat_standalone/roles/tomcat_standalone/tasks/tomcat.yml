@@ -9,7 +9,7 @@
 - name: TomCat -=- Create symbolic link to installation dir
   file:
     src: "/opt/{{ tomcat_archive }}"
-    dest: {{ tomcat_work_dir }}
+    dest: "{{ tomcat_work_dir }}"
     state: link
 
 - name: TomCat -=- Create tomcat init script
@@ -19,10 +19,10 @@
   file: path="/opt/{{ tomcat_archive }}" owner={{ tomcat_user }} group=tomcat recurse=yes
   
 - name: TomCat -=- Configure server
-  template: src=server.xml.7 dest={{ catalina_home }}/conf/server.xml backup=yes
+  template: src=server.xml.7 dest="{{ catalina_home }}/conf/server.xml" backup=yes
 
 - name: TomCat -=- Configure users
-  template: src=tomcat-users.xml dest={{ catalina_home }}/conf/
+  template: src=tomcat-users.xml dest="{{ catalina_home }}/conf/"
 
 - name: TomCat -=- Start service
   shell: /etc/init.d/tomcat start
