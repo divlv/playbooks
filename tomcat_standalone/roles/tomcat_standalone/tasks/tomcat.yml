@@ -3,6 +3,10 @@
 - name: TomCat -=- Download from tomcat.apache.org
   get_url: url="http://www-eu.apache.org/dist/tomcat/tomcat-7/v7.0.85/bin/{{ tomcat_archive }}.zip" dest="{{ tomcat_download_dir }}/{{ tomcat_archive }}.zip"
 
+- name: TomCat -=- Delete old tomcat dir, if any
+  file: path="{{ tomcat_real_work_dir }}" state=absent
+  ignore_errors: yes
+  
 - name: TomCat -=- Extract archive
   command: chdir=/opt unzip -q {{ tomcat_download_dir }}/{{ tomcat_archive }}.zip
 
