@@ -1,0 +1,5 @@
+#!/bin/bash
+
+service haproxy stop
+
+service tomcat stop
