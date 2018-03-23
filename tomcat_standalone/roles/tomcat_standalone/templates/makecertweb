@@ -1,0 +1,21 @@
+#!/bin/bash
+
+rm -r -f /tmp/cert
+mkdir -p /tmp/cert/.well-known/acme-challenge
+
+cd /tmp/cert
+
+killall python
+
+service lighttpd stop
+
+python -m SimpleHTTPServer 80 &
+
+letsencrypt certonly --webroot -w /tmp/cert -d {{full_server_name}}
+
+cat /etc/letsencrypt/archive/{{full_server_name}}/privkey1.pem /etc/letsencrypt/archive/{{full_server_name}}/fullchain1.pem > /etc/haproxy/{{full_server_name}}.pem
+
+# Secure file
+chmod go-rwx /etc/haproxy/{{full_server_name}}.pem
+
+killall python

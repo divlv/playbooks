@@ -1,0 +1,36 @@
+#
+#
+- name: HAproxy -=- Install main package
+  apt: name={{ item }} state=installed
+  with_items:
+    - haproxy
+    - net-tools
+
+- name: HAproxy -=- Copy config file
+  template: src=haproxy.cfg  dest=/etc/haproxy/haproxy.cfg mode=0644
+
+- name: LetsEncrypt -=- Install LetsEncrypt package
+  apt: pkg=letsencrypt state=present
+
+- name: LetsEncrypt -=- Create dhparam.pem (2048)
+  command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+  
+- name: LetsEncrypt -=- CERTbot script for {{ full_server_name }}
+  template: src=makecertweb dest=/root/{{ full_server_name }}_makecertweb mode=0700
+  
+- name: Copy Services start script
+  copy: src=startall dest=/root/startall group=root owner=root mode=0755
+  
+- name: Copy Services stop script
+  copy: src=stopall dest=/root/stopall group=root owner=root mode=0755
+  
+- name: Create symbolic link to HAproxy configuration dir
+  file:
+    src: /etc/haproxy
+    dest: /z_haconf
+    state: link
+
+- name: HAproxy -=- Stop
+  service: name=haproxy
+           state=stopped
+           enabled=yes

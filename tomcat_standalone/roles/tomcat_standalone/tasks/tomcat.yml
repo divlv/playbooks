@@ -22,9 +22,12 @@
     dest: "{{ tomcat_work_dir }}"
     state: link
 
-- name: TomCat -=- Create tomcat init script
-  template: src=tomcat.sh dest=/etc/init.d/tomcat owner=root group=root mode=0766
+#- name: TomCat -=- Create tomcat init script
+#  template: src=tomcat.sh dest=/etc/init.d/tomcat owner=root group=root mode=0766
 
+- name: TomCat -=- Create tomcat systemd service script
+  template: src=tomcat.service dest=/etc/systemd/system/tomcat.service owner=root group=root mode=0766
+  
 - name: TomCat -=- Set file permissions
   file: path={{ tomcat_real_work_dir }} owner={{ tomcat_user }} group=tomcat recurse=yes
   
