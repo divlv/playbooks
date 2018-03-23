@@ -24,7 +24,7 @@ jre_home: "{{ java_home }}/jre"
 catalina_base: "/opt/apache-tomcat-{{ tomcat_version }}"
 catalina_home: "/opt/apache-tomcat-{{ tomcat_version }}"
 #catalina_tempdir: /opt/apache-tomcat-{{ tomcat_version }}/temp
-catalina_tempdir: {{ tomcat_download_dir }}
+catalina_tempdir: "{{ tomcat_download_dir }}"
 
 # User management
 tomcat_user: tomcat
