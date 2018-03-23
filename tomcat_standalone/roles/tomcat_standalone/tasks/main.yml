@@ -1,9 +1,9 @@
 ---
 #
-#- include: initial.yml
-#- include: java8.yml
+- include: initial.yml
+- include: java8.yml
 - include: tomcat.yml
 - include: letsencrypt_haproxy.yml
 #- include: firewall.yml
-#- include: reboot.yml
+- include: reboot.yml
 #
