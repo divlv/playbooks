@@ -13,6 +13,7 @@ tomcat_download_dir: /tmp
 # Max POST size = 32Mb
 max_data_to_receive: 32000000
 tomcat_work_dir: /opt/tomcat
+tomcat_real_work_dir: "/opt/{{ tomcat_archive }}"
 #
 
 http_port: 8080
