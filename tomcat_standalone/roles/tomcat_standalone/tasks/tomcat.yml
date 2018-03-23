@@ -22,12 +22,6 @@
     dest: "{{ tomcat_work_dir }}"
     state: link
 
-#- name: TomCat -=- Create tomcat init script
-#  template: src=tomcat.sh dest=/etc/init.d/tomcat owner=root group=root mode=0766
-
-- name: TomCat -=- Create tomcat systemd service script
-  template: src=tomcat.service dest=/etc/systemd/system/tomcat.service owner=root group=root mode=0766
-  
 - name: TomCat -=- Set file permissions
   file: path={{ tomcat_real_work_dir }} owner={{ tomcat_user }} group=tomcat recurse=yes
 
@@ -39,6 +33,17 @@
 
 - name: TomCat -=- Configure users
   template: src=tomcat-users.xml dest="{{ catalina_home }}/conf/"
+
+- name: TomCat -=- Create tomcat init script
+  template: src=tomcat.sh dest=/etc/init.d/tomcat owner=root group=root mode=0766
+
+- name: TomCat -=- Permissions for executable files
+  shell: "chmod 766 {{ tomcat_real_work_dir }}/bin/*.sh"
+
+- name: TomCat -=- Register as a service
+  shell: "update-rc.d tomcat defaults"
+# And from now on it will be automatically started and shut down upon entering the appropriate runlevels. 
+# We can also control it with "service tomcat <stop|start|restart>"
 
 - name: TomCat -=- Start service
   shell: /etc/init.d/tomcat start
