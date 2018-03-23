@@ -6,7 +6,7 @@
 - name: TomCat -=- Extract archive
   command: chdir=/opt unzip -q {{ tomcat_download_dir }}/{{ tomcat_archive }}.zip
 
- - name: TomCat -=- Create symbolic link to installation dir
+- name: TomCat -=- Create symbolic link to installation dir
   file:
     src: "/opt/{{ tomcat_archive }}"
     dest: {{ tomcat_work_dir }}
