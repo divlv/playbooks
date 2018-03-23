@@ -10,9 +10,6 @@
 - name: TomCat -=- Extract archive
   command: chdir=/opt unzip -q {{ tomcat_download_dir }}/{{ tomcat_archive }}.zip
 
-- name: TomCat -=- Permissions for executable files
-  command: chmod 766 {{ tomcat_real_work_dir }}/bin/*.sh
-  
 - name: TomCat -=- Add group
   group: name={{ tomcat_group }}
 
@@ -33,6 +30,9 @@
   
 - name: TomCat -=- Set file permissions
   file: path={{ tomcat_real_work_dir }} owner={{ tomcat_user }} group=tomcat recurse=yes
+
+- name: TomCat -=- Permissions for executable files
+  file: dest="{{ tomcat_real_work_dir }}/bin/*.sh" mode=766
   
 - name: TomCat -=- Configure server
   template: src=server.xml.7 dest="{{ catalina_home }}/conf/server.xml" backup=yes
