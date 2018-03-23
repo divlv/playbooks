@@ -36,5 +36,5 @@ manager_user: admin
 manager_password: admin
 
 # WWW
-full_server_name: tomcat.eastus.cloudapp.azure.com
+full_server_name: rixtomcat.eastus.cloudapp.azure.com
 #
