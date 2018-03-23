@@ -6,9 +6,15 @@
 - name: TomCat -=- Extract archive
   command: chdir=/opt unzip -q {{ tomcat_download_dir }}/{{ tomcat_archive }}.zip
 
+- name: TomCat -=- Add group
+  group: name={{ tomcat_group }}
+
+- name: TomCat -=- Add user
+  user: name={{ tomcat_user }} group={{ tomcat_group }} home={{ tomcat_real_work_dir }} shell=/bin/false
+  
 - name: TomCat -=- Create symbolic link to installation dir
   file:
-    src: "/opt/{{ tomcat_archive }}"
+    src: "{{ tomcat_real_work_dir }}"
     dest: "{{ tomcat_work_dir }}"
     state: link
 
@@ -16,7 +22,7 @@
   template: src=tomcat.sh dest=/etc/init.d/tomcat owner=root group=root mode=0766
 
 - name: TomCat -=- Set file permissions
-  file: path="/opt/{{ tomcat_archive }}" owner={{ tomcat_user }} group=tomcat recurse=yes
+  file: path={{ tomcat_real_work_dir }} owner={{ tomcat_user }} group=tomcat recurse=yes
   
 - name: TomCat -=- Configure server
   template: src=server.xml.7 dest="{{ catalina_home }}/conf/server.xml" backup=yes
