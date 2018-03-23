@@ -20,16 +20,16 @@ https_port: 8443
 
 # Environment variables
 java_home: /usr/lib/jvm/java-8-oracle
-jre_home: {{ java_home }}/jre
-catalina_base: /opt/apache-tomcat-{{ tomcat_version }}
-catalina_home: /opt/apache-tomcat-{{ tomcat_version }}
+jre_home: "{{ java_home }}/jre"
+catalina_base: "/opt/apache-tomcat-{{ tomcat_version }}"
+catalina_home: "/opt/apache-tomcat-{{ tomcat_version }}"
 #catalina_tempdir: /opt/apache-tomcat-{{ tomcat_version }}/temp
 catalina_tempdir: {{ tomcat_download_dir }}
 
 # User management
 tomcat_user: tomcat
 tomcat_group: tomcat
-tomcat_user_home: /opt/{{ catalina_home }}/tmp
+tomcat_user_home: "/opt/{{ catalina_home }}/tmp"
 tomcat_uid: '500'
 manager_user: admin
 manager_password: admin
