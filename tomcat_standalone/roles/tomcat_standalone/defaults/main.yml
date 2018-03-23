@@ -6,16 +6,30 @@
 tomcat_version: 7.0.85
 tomcat_archive: "apache-tomcat-{{ tomcat_version }}"
 
-tomcat_user: tomcat
-tomcat_group: tomcat
-tomcat_service_name: tomcat
 
+tomcat_service_name: tomcat
 tomcat_download_dir: /tmp
 
 # Max POST size = 32Mb
-tomcat_max_data_to_receive: 32000000
-
+max_data_to_receive: 32000000
 tomcat_work_dir: /opt/tomcat
-tomcat_admin_login: "dima"
-tomcat_admin_password: "05alus"
 #
+
+http_port: 8080
+https_port: 8443
+
+# Environment variables
+java_home: /usr/lib/jvm/java-8-oracle
+jre_home: {{ java_home }}/jre
+catalina_base: /opt/apache-tomcat-{{ tomcat_version }}
+catalina_home: /opt/apache-tomcat-{{ tomcat_version }}
+#catalina_tempdir: /opt/apache-tomcat-{{ tomcat_version }}/temp
+catalina_tempdir: {{ tomcat_download_dir }}
+
+# User management
+tomcat_user: tomcat
+tomcat_group: tomcat
+tomcat_user_home: /opt/{{ catalina_home }}/tmp
+tomcat_uid: '500'
+manager_user: admin
+manager_password: admin
