@@ -10,6 +10,9 @@
 - name: TomCat -=- Extract archive
   command: chdir=/opt unzip -q {{ tomcat_download_dir }}/{{ tomcat_archive }}.zip
 
+- name: TomCat -=- Permissions for executable files
+  command: chmod 766 {{ tomcat_real_work_dir }}/bin/*.sh
+  
 - name: TomCat -=- Add group
   group: name={{ tomcat_group }}
 
