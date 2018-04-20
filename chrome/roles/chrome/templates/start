@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Start main container
+docker run --shm-size=256m -d -p {{ rendertron_port }}:8080 rendertron
+#
