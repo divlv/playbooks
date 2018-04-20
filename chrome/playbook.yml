@@ -1,0 +1,28 @@
+# Workaround for AWS/Hetzner/Azure and others who don't allow ROOT at once:
+# 1-st time it allows to login only as "ubuntu" (or other not root) user.
+# It needs just overwrite "authorized_keys" file for root user - to allow remote root login.
+# 
+# For this special task, we must use "remote_user = {raw_linux_user}" to force login as "{raw_linux_user}" this time
+#
+#- name: Include Global vars
+#- include_vars: vars.yml
+#    file: vars.yml
+
+- remote_user: ubuntu
+  hosts: all
+  # Adjusted for Hetzner/Azure: Ubuntu 16.04 has only python3 here:
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+  - allow_root_login
+#
+# Now we can proceed as always. Remote ROOT login should be already enabled.
+#
+- hosts: all
+  # Adjusted for Hetzner/Azure: Ubuntu 16.04 has only python3 here:
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+  - elk
+
+

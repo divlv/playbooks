@@ -1,0 +1,18 @@
+- debug:
+    msg: "REBOOTING SERVER! Timezone and other stuff changed. All services must reload new settings!"
+
+# This is working, but not needed anymore. Left for future reference
+#- name: Call reboot script
+#  shell: shutdown -r 10:26 1>/dev/null 2>/dev/null
+
+- name: REBOOT remote server
+  shell: sleep 2 && shutdown -r now "Reboot triggered by Ansible"
+  async: 1
+  poll: 0
+  ignore_errors: true
+  
+- name: Waiting for server to come back...
+  local_action: wait_for host={{ inventory_hostname }} port=22 state=started delay=3 timeout=120
+
+- debug:
+    msg: "Looks like server was rebooted successfully."

@@ -1,0 +1,19 @@
+- debug:
+    msg: "Preparing infrastructure for Headless Chrome Docker image"
+
+- name: Create Docker directory
+  file: path=/opt
+        state=directory
+        mode=0775
+
+- name: Copy GELF config file
+  copy: src=03-gelf-input.conf dest=/opt/elk/03-gelf-input.conf mode=0666
+  
+- name: Copy Dockerfile
+  copy: src=Dockerfile dest=/opt/elk/Dockerfile mode=0666
+  
+- name: Copy build script
+  copy: src=dockerbuild.sh dest=/opt/dockerbuild.sh mode=0777
+
+- name: Building Headless Chrome Docker Image
+  command: /opt/dockerbuild.sh
