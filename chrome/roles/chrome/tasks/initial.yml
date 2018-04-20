@@ -27,8 +27,3 @@
   - wput
   - python3-pip
  
-- name: Install Micro editor (step 1 of 2)
-  copy: src=install_micro.sh dest=/root/install_micro.sh mode=0777
-
-- name: Install Micro editor (step 2 of 2)
-  command: /root/install_micro.sh
