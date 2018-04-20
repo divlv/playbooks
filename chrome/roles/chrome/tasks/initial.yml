@@ -1,0 +1,34 @@
+- name: Setting LV Timezone (step 1 of 2)
+  file: path=/etc/localtime state=absent
+
+- name: Setting LV Timezone (step 2 of 2)
+  file:
+    src: /usr/share/zoneinfo/Europe/Riga
+    dest: /etc/localtime
+    state: link
+
+- name: Update APT
+  command: apt-get update
+
+- name: Preparing Aliases script
+  copy: src=aliases.sh dest=/root/aliases.sh mode=0777
+
+- name: Apply Aliases
+  command: /root/aliases.sh
+
+- name: Misc apps
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - mc
+  - ncdu
+  - git
+  - htop
+  - psmisc
+  - wput
+  - python3-pip
+ 
+- name: Install Micro editor (step 1 of 2)
+  copy: src=install_micro.sh dest=/root/install_micro.sh mode=0777
+
+- name: Install Micro editor (step 2 of 2)
+  command: /root/install_micro.sh

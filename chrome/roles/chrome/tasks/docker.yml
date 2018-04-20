@@ -1,0 +1,67 @@
+- name: Import Docker CE repository gpg key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+- name: Add Docker CE repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+
+- name: Install Docker CE
+  apt:
+    name: docker-ce
+    state: present
+    update_cache: yes
+
+- debug:
+    msg: "Adjusting Linux virtual memory setting for ELK:"
+
+- lineinfile:
+    dest: /etc/sysctl.conf
+    line: 'vm.max_map_count = 262144'
+
+- debug:
+    msg: "Enable IPv4 port binding for Docker (step 1 of 3)"
+
+- lineinfile:
+    dest: /etc/sysctl.conf
+    line: 'net.ipv6.conf.all.forwarding = 1'
+
+- debug:
+    msg: "Enable IPv4 port binding for Docker (step 2 of 3)"
+
+- lineinfile:
+    dest: /etc/sysctl.conf
+    line: 'net.ipv6.bindv6only = 0'
+
+- debug:
+    msg: "Enable IPv4 port binding for Docker (step 3 of 3)"
+
+- lineinfile:
+    dest: /etc/sysctl.conf
+    line: 'net.ipv4.ip_forward = 1'
+    
+- debug:
+    msg: "Disabling IPv6 on host machine (step 1 of 3)"
+
+- lineinfile:
+    dest: /etc/sysctl.conf
+    line: 'net.ipv6.conf.all.disable_ipv6 = 1'
+    
+- debug:
+    msg: "Disabling IPv6 on host machine (step 2 of 3)"
+
+- lineinfile:
+    dest: /etc/sysctl.conf
+    line: 'net.ipv6.conf.default.disable_ipv6 = 1'
+    
+- debug:
+    msg: "Disabling IPv6 on host machine (step 3 of 3)"
+
+- lineinfile:
+    dest: /etc/sysctl.conf
+    line: 'net.ipv6.conf.lo.disable_ipv6 = 1'
+   
+    

@@ -1,0 +1,10 @@
+---
+#
+#user: "lighttpd"
+#lighttpd_server_port: "22280"
+#pemfile: "/cert.pem"
+rendertron_port: 12777
+#
+base_ip: 1.1.1.1
+client_ip: 2.2.2.2
+#

@@ -1,0 +1,17 @@
+# Setting up Firewall BEGIN------------------
+
+#- name: Firewall saver
+#  apt: pkg=netfilter-persistent state=installed
+
+- name: Copy Firewall settings script
+  template: src=iptables.sh dest=~/iptables.sh mode=0700
+
+- name: Apply Firewall settings
+  command: ~/iptables.sh
+
+- name: Make Firewall start at boot
+  template: src=firewall_on dest=/etc/network/if-pre-up.d/firewall_on mode=0777
+
+# Setting up Firewall END -------------------
+
+#     https://askubuntu.com/questions/119393/how-to-save-rules-of-the-iptables !!!
