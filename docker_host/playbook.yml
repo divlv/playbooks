@@ -6,13 +6,13 @@
 #
 
 ### Uncomment this if needed to make ROOT user login remotely ###
-#- remote_user: ubuntu
-#  hosts: all
-#  # Adjusted for Hetzner/Azure/AWS/etc.: Ubuntu 16.04 has only python3 here:
-#  vars:
-#    ansible_python_interpreter: /usr/bin/python3
-#  roles:
-#  - allow_root_login
+- remote_user: ubuntu
+  hosts: all
+  # Adjusted for Hetzner/Azure/AWS/etc.: Ubuntu 16.04 has only python3 here:
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+  - allow_root_login
 
 
 #
