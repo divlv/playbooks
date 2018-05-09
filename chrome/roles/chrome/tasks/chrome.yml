@@ -9,8 +9,24 @@
 - name: Copy build script
   copy: src=dockerbuild.sh dest=/opt/dockerbuild.sh mode=0777
 
-- name: Copy start service script
+- name: Copy start service script (1 of 2)
   template: src=start dest=/opt/start mode=0777
 
+- name: Copy start service script (2 of 2)
+  template: src=start dest=/root/start mode=0777
+  
+- name: Copy stop service script (1 of 2)
+  template: src=stop dest=/opt/stop mode=0777
+
+- name: Copy stop service script (2 of 2)
+  template: src=stop dest=/root/stop mode=0777
+  
+- name: Copy restart service script (1 of 2)
+  template: src=restart dest=/opt/restart mode=0777
+
+- name: Copy restart service script (2 of 2)
+  template: src=restart dest=/root/restart mode=0777
+  
 - name: Building Headless Chrome Docker Image
   command: /opt/dockerbuild.sh
+

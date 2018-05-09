@@ -1,5 +1,9 @@
 #!/bin/bash
 #
+# Stop running Rendertron container
+#
+docker stop $(docker ps -q --filter ancestor=rendertron)
+#
 # Start Rendertron container
 #
 docker run --restart unless-stopped --shm-size=512m -d -p {{ rendertron_port }}:8080 rendertron
