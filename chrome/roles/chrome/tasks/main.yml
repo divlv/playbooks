@@ -5,8 +5,9 @@
 - include: reboot.yml
 - include: chrome.yml
 - include: firewall.yml
+- include: cron.yml
 - include: reboot.yml
 #
 - name: Starting Headless Chrome Docker image
-  command: "docker run --shm-size=256m -d -p {{ rendertron_port }}:8080 rendertron"
+  command: ~/start
 #

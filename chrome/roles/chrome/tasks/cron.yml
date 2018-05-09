@@ -1,0 +1,18 @@
+---
+# CRON Container restart settings
+
+
+- debug:
+    msg: "Cron -=- Adding CRON jobs for restart running docker container"
+ 
+- cron:
+   name: "container_restart_job"
+   minute: "14"
+   hour: "4"
+   job: "/root/restart > /tmp/cron_restart.log"
+
+- cron:
+   name: "just a fake job - to close crontab file properly"
+   minute: "28"
+   hour: "5"
+   job: "date > /dev/null"
