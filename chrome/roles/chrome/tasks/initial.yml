@@ -7,6 +7,12 @@
     dest: /etc/localtime
     state: link
 
+- name: Release APT lock if any (1 of 2)
+  command: rm -f /var/lib/apt/lists/lock
+
+- name: Release APT lock if any (2 of 2)
+  command: rm -f /var/cache/apt/archives/lock
+
 - name: Update APT
   command: apt-get update
 
