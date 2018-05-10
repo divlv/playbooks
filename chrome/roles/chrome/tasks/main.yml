@@ -4,7 +4,9 @@
 - include: docker.yml
 - include: reboot.yml
 - include: chrome.yml
+# ATTENTION! Check "base_ip" and "client_ip" in default settings!
 - include: firewall.yml
+#
 - include: cron.yml
 - include: reboot.yml
 #
