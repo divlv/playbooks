@@ -1,6 +1,27 @@
 ---
 #
-- include: initial.yml
+##################### Download and run shared initial commands: ###########################
+#
+- name: Cleanup previously downloaded initial.yml
+  local_action:
+      module: file
+      state: absent
+      path: "/tmp/initial.yml"
+      force: yes
+
+
+- name: Download shared initial.yml
+  local_action:
+    module: get_url
+    url: https://raw.githubusercontent.com/divlv/playbooks/master/shared/initial.yml
+    dest: /tmp/initial.yml
+
+
+- include: /tmp/initial.yml
+#
+###########################################################################################
+#
+
 - include: java8.yml
 - include: tomcat.yml
 - include: letsencrypt_haproxy.yml
