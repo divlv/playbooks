@@ -1,0 +1,3 @@
+# Common shared routines for all playbooks
+- debug:
+    msg: "Running common tasks... (Downloaded)"

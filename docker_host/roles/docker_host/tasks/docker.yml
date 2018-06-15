@@ -68,6 +68,13 @@
 #
 # Copy sample docker build files:
 
+- name: Installing Docker extra packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - osmctools
+  - bridge-utils
+
+
 - debug:
     msg: "Copy sample docker build files..."
 
