@@ -8,9 +8,11 @@
         state=directory
         mode=0775
 
+- name: Copy GHOST start script
+  template: src=start dest={{ ghost_dir }}/start mode=0777
 
-- name: Copy GHOST build script
-  template: src=run.sh dest={{ ghost_dir }}/run.sh mode=0777
+- name: Copy GHOST stop script
+  template: src=stop dest={{ ghost_dir }}/stop mode=0777
 
 - name: Build and start GHOST
-  command: "{{ ghost_dir }}/run.sh"
+  command: "{{ ghost_dir }}/start"
