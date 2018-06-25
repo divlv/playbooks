@@ -8,6 +8,12 @@ docker rm -f $(docker ps -a -q)
 # Delete every Docker image
 docker rmi -f $(docker images -q)
 
+# And stop all containers, based on "ghost:1-apline"
+------------------------------------------------------------------------------------
+docker stop $(docker ps -q --filter ancestor=ghost:1-apline)
+------------------------------------------------------------------------------------
+
+
 #########
 stop all containers:
 docker kill $(docker ps -q)
