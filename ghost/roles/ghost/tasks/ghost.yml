@@ -1,0 +1,16 @@
+- name: Create GHOST directory
+  file: path={{ ghost_dir }}
+        state=directory
+        mode=0775
+
+- name: Create GHOST data directory
+  file: path={{ ghost_data_dir }}
+        state=directory
+        mode=0775
+
+
+- name: Copy GHOST build script
+  template: src=run.sh dest={{ ghost_dir }}/run.sh mode=0777
+
+- name: Build and start GHOST
+  command: {{ ghost_dir }}/run.sh
