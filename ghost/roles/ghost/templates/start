@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Sample GHOST Build script
+# Sample GHOST start script
 #
 cd {{ ghost_dir }} 
 #
