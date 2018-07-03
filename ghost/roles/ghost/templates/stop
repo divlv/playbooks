@@ -2,6 +2,6 @@
 #
 # GHOST Stop script
 #
-docker stop $(docker ps -q --filter ancestor=ghost:1-apline)
+docker stop $(docker ps -q --filter ancestor={{ blog_image }})
 #
 #
