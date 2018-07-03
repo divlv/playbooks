@@ -8,11 +8,20 @@
         state=directory
         mode=0775
 
+- name: Copy GHOST Dockerfile
+  template: src=Dockerfile dest={{ ghost_dir }}/Dockerfile mode=0666
+
+- name: Copy GHOST build script
+  template: src=build dest={{ ghost_dir }}/build mode=0777
+
 - name: Copy GHOST start script
   template: src=start dest={{ ghost_dir }}/start mode=0777
 
 - name: Copy GHOST stop script
   template: src=stop dest={{ ghost_dir }}/stop mode=0777
 
-- name: Build and start GHOST
+- name: Build GHOST
+  command: "{{ ghost_dir }}/build"
+
+- name: Start GHOST engine
   command: "{{ ghost_dir }}/start"

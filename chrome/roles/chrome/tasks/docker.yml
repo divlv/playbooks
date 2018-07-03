@@ -19,6 +19,13 @@
     update_cache: yes
 
 - debug:
+    msg: "Disabling DOCKER firewall ruels:"
+
+- lineinfile:
+    dest: /etc/default/docker
+    line: 'DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4 --iptables=false"'
+
+- debug:
     msg: "Adjusting Linux virtual memory setting for ELK:"
 
 - lineinfile:

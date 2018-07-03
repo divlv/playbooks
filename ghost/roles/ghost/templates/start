@@ -4,8 +4,8 @@
 #
 cd {{ ghost_dir }} 
 #
-#docker build -t wfelk . 
+#docker build -t {{ blog_image }} . 
 
-docker run -d -p {{ ghost_port }}:2368 -v {{ ghost_data_dir }}:/var/lib/ghost/content ghost:1-alpine
+docker run -d -p {{ ghost_port }}:2368 -v {{ ghost_data_dir }}:/var/lib/ghost/content {{ blog_image }}
 
 #
