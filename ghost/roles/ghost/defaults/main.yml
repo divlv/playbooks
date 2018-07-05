@@ -4,4 +4,5 @@ ghost_dir: "/opt/ghost"
 ghost_data_dir: "/opt/ghost/data"
 ghost_port: 80
 blog_image: "myblog"
+blog_domain: "http://myblog.v1.lv"
 #
