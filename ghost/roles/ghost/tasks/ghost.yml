@@ -23,7 +23,7 @@
 - name: Copy GHOST data backup script
   template: src=backupdata dest={{ ghost_dir }}/backupdata mode=0777
 
-- name: Copy GHOST data backup ulpoad script
+- name: Copy GHOST data backup upload script
   template: src=uploadbackup dest={{ ghost_dir }}/uploadbackup mode=0777
 
 - name: Build GHOST
