@@ -20,6 +20,12 @@
 - name: Copy GHOST stop script
   template: src=stop dest={{ ghost_dir }}/stop mode=0777
 
+- name: Copy GHOST data backup script
+  template: src=backupdata dest={{ ghost_dir }}/backupdata mode=0777
+
+- name: Copy GHOST data backup ulpoad script
+  template: src=uploadbackup dest={{ ghost_dir }}/uploadbackup mode=0777
+
 - name: Build GHOST
   command: "{{ ghost_dir }}/build"
 
