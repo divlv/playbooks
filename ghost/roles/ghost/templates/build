@@ -1,8 +1,0 @@
-#!/bin/bash
-#
-# Sample GHOST Build script
-#
-cd {{ ghost_dir }} 
-#
-docker build -t {{ blog_image }} .
-#

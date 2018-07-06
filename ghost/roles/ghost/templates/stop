@@ -1,7 +1,0 @@
-#!/bin/bash
-#
-# GHOST Stop script
-#
-docker stop $(docker ps -q --filter ancestor={{ blog_image }})
-#
-#
