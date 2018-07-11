@@ -1,4 +1,6 @@
 ---
 #
 docker_dir: "/opt/docker"
+docker_network_name: "dznet"
+docker_network_subnet: "172.18.0.0/16"
 #

@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Create DOCKER network:
+#
+docker network create --subnet={{ docker_network_subnet }} {{ docker_network_name }}
+#echo "sleep 4 ; COMMAND" | at now
+#

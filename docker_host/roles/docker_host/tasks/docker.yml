@@ -92,6 +92,12 @@
 - name: Copy build script
   copy: src=dockerbuild.sh dest="{{ docker_dir }}/dockerbuild.sh" mode=0777
 
+- name: Copy DOCKER network script
+  template: src=createnetwork dest=/root/createnetwork mode=0755
+
+- name: Create DOCKER Network
+  command: /root/createnetwork
+
 #- name: Building ELK/GELF Docker Image
 #  command: /opt/elk/dockerbuild.sh
 
