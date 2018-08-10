@@ -6,12 +6,12 @@
   become: yes
   apt_repository: repo='ppa:webupd8team/java'
 
+- name: Update APT
+  command: apt-get update
+
 - name: Autoaccept license for Java
   become: yes
   debconf: name='oracle-java7-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
-
-- name: Update APT
-  command: apt-get update
 
 - name: Install Oracle Java 7
   become: yes
