@@ -22,8 +22,8 @@
 ###########################################################################################
 #
 
-- include: java7.yml
-#- include: java8.yml
+#- include: java7.yml
+- include: java8.yml
 - include: tomcat.yml
 - include: letsencrypt_haproxy.yml
 #- include: firewall.yml
