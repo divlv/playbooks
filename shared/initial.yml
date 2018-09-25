@@ -42,6 +42,7 @@
   - htop
   - psmisc
   - wput
+  - unzip
   - python3-pip
  
 #- name: Install Micro editor (step 1 of 2)
