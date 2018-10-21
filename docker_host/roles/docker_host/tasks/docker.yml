@@ -98,9 +98,3 @@
 - name: Create DOCKER Network
   command: /root/createnetwork
 
-- name: Create Docker volume for Portainer
-  command: "docker volume create portainer_data"
-
-- name: Starting Portainer Docker image
-  command: docker run -d -p 19000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
-
