@@ -42,28 +42,28 @@
 - lineinfile:
     dest: /etc/sysctl.conf
     line: 'net.ipv4.ip_forward = 1'
-    
+
 - debug:
     msg: "Disabling IPv6 on host machine (step 1 of 3)"
 
 - lineinfile:
     dest: /etc/sysctl.conf
     line: 'net.ipv6.conf.all.disable_ipv6 = 1'
-    
+
 - debug:
     msg: "Disabling IPv6 on host machine (step 2 of 3)"
 
 - lineinfile:
     dest: /etc/sysctl.conf
     line: 'net.ipv6.conf.default.disable_ipv6 = 1'
-    
+
 - debug:
     msg: "Disabling IPv6 on host machine (step 3 of 3)"
 
 - lineinfile:
     dest: /etc/sysctl.conf
     line: 'net.ipv6.conf.lo.disable_ipv6 = 1'
-   
+
 ###########################################
 #
 # Copy sample docker build files:
@@ -85,10 +85,10 @@
 
 - name: Copy Sample image config file
   copy: src=03-gelf-input.conf dest="{{ docker_dir }}/03-gelf-input.conf" mode=0666
-  
+
 - name: Copy Dockerfile
   copy: src=Dockerfile dest="{{ docker_dir }}/Dockerfile" mode=0666
-  
+
 - name: Copy build script
   copy: src=dockerbuild.sh dest="{{ docker_dir }}/dockerbuild.sh" mode=0777
 
@@ -98,13 +98,9 @@
 - name: Create DOCKER Network
   command: /root/createnetwork
 
-#- name: Building ELK/GELF Docker Image
-#  command: /opt/elk/dockerbuild.sh
+- name: Create Docker volume for Portainer
+  command: "docker volume create portainer_data"
 
-#- name: Starting ELK/GELF Docker image
-#  command: docker run -p 80:5601 -p 9200:9200 -p 9300:9300 -p 12201:12201/udp --name elk1 wfelk
-
-
-
-
+- name: Starting Portainer Docker image
+  command: docker run -d -p 19000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 
