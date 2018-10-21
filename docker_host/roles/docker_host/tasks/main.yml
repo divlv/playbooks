@@ -25,3 +25,10 @@
 - include: firewall.yml
 - include: reboot.yml
 #
+# Create Portainer instance for Docker Host:
+#
+- name: Create Docker volume for Portainer
+  command: "docker volume create portainer_data"
+
+- name: Starting Portainer Docker image
+  command: docker run -d -p 19000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
