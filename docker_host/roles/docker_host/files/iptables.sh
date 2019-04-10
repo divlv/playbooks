@@ -45,6 +45,10 @@ iptables -A INPUT -p tcp -s 80.233.156.0/22 -m tcp --dport 5432 -j ACCEPT
 iptables -A INPUT -p tcp -s 159.148.74.220 -m tcp --dport 2812 -j ACCEPT
 iptables -A INPUT -p tcp -s 80.233.156.0/22 -m tcp --dport 2812 -j ACCEPT
 
+# Portainer
+iptables -A INPUT -p tcp -s 159.148.74.220 -m tcp --dport 19000 -j ACCEPT
+iptables -A INPUT -p tcp -s 80.233.156.0/22 -m tcp --dport 19000 -j ACCEPT
+
 
 # Allow o use outgoing connections
 iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
