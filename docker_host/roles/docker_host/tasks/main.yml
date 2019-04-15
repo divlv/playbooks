@@ -32,3 +32,7 @@
 
 - name: Starting Portainer Docker image
   command: docker run -d -p 19000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+
+- name: Copy Portainer start script
+  copy: src=portainer dest=/root/portainer mode=0777
+#
