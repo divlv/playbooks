@@ -46,6 +46,7 @@
   - unzip
   - swatch
   - python3-pip
+  - bash-completion
  
 #- name: Install Micro editor (step 1 of 2)
 #  copy: src=install_micro.sh dest=/root/install_micro.sh mode=0777
