@@ -1,19 +1,31 @@
 # Setting up Firewall BEGIN------------------
 
+
+- name: Make Docker respect IpTables -=- Settings directory
+  file: path=/etc/systemd/system/docker.service.d
+        state=directory
+        mode=0775
+
+- name: Make Docker respect IpTables
+  copy: src=noiptables.conf dest=/etc/systemd/system/docker.service.d/noiptables.conf mode=0644
+
+- name: Restarting Docker service
+  command: systemctl daemon-reload
+
 - name: Copy Firewall settings script
   copy: src=iptables.sh dest=/root/iptables.sh mode=0777
-  
+
 #- name: Make Firewall start at boot
 #  copy: src=firewall_on.sh dest=/etc/network/if-pre-up.d/firewall_on.sh mode=0777
 
 # Some Systems doesn't start "if-pre-up.d" scriptsa as expected, so use the following:
 - debug:
     msg: "Place Firewall startup script into /etc/rc.local"
-    
+
 - lineinfile:
     dest: "/etc/rc.local"
     regexp: '^(local[\s]+all[\s]+postgres[\s]+)peer([\s]*)$'
-    insertafter: '^# This script' 
+    insertafter: '^# This script'
     line: '/root/iptables.sh'
 
 
