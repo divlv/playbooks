@@ -16,6 +16,12 @@ iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
 # localhost interface
 iptables -A INPUT -i lo -j ACCEPT
 
+# Allow Docker exposing ports, but respect IPTABLES rules:
+iptables -A FORWARD -i docker0 -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o docker0 -j ACCEPT
+#
+
+
 #allow web server traffic
 iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
@@ -55,7 +61,7 @@ iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # Block everything else, and allow all outgoing connections.
 iptables -P OUTPUT ACCEPT
-iptables -P INPUT DROP
+#iptables -P INPUT DROP
 
 # List all rules
 iptables -L -n
