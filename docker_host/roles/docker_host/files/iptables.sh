@@ -61,7 +61,7 @@ iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # Block everything else, and allow all outgoing connections.
 iptables -P OUTPUT ACCEPT
-#iptables -P INPUT DROP
+iptables -P INPUT DROP
 
 # List all rules
 iptables -L -n
