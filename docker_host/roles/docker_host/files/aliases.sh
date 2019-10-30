@@ -10,7 +10,10 @@ echo "alias getsize='du -a -h --max-depth=1'" >> ~/.bash_aliases && source ~/.ba
 echo "alias ffind='find / -name '" >> ~/.bash_aliases && source ~/.bash_aliases
 
 #Adding open ports display command alias
-echo "alias ports='netstat -an | grep LISTEN'" >> ~/.bash_aliases && source ~/.bash_aliases
+echo "alias ports='netstat -anltp | grep LISTEN'" >> ~/.bash_aliases && source ~/.bash_aliases
+
+#Adding all ports in use display command alias
+echo "alias portsa='netstat -anltp'" >> ~/.bash_aliases && source ~/.bash_aliases
 
 #Docker related aliases: Stop all containers
 echo "alias dstop='docker stop $(docker ps -aq)'" >> ~/.bash_aliases && source ~/.bash_aliases
