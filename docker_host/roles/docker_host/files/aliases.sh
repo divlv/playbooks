@@ -18,3 +18,7 @@ echo "alias portsa='netstat -anltp'" >> ~/.bash_aliases && source ~/.bash_aliase
 #Docker related aliases: Stop all containers
 echo "alias dstop='docker stop $(docker ps -aq)'" >> ~/.bash_aliases && source ~/.bash_aliases
 
+#IP Tables: detailed report
+echo "alias iptl='iptables -nv -L'" >> ~/.bash_aliases && source ~/.bash_aliases
+
+
