@@ -22,6 +22,10 @@ iptables -A OUTPUT -o lo -j ACCEPT
 iptables -A FORWARD -i docker0 -o eth0 -j ACCEPT
 iptables -A FORWARD -i eth0 -o docker0 -j ACCEPT
 #
+# Wildcard rule for Docker/User bridge networks, e.g. "br-f985e578d3a0"
+iptables -A FORWARD -i br-+ -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o br-+ -j ACCEPT
+#
 
 # MAIN PART ######################################################################
 
