@@ -25,6 +25,15 @@
 - name: Apply Aliases
   command: /root/aliases.sh
 
+- name: Ubuntu18 -=- Stop ubuntu-release-upgrader
+  command: "killall check-new-release"
+
+- name: Ubuntu18 -=- Remove ubuntu-release-upgrader
+  apt:
+    pkg: ubuntu-release-upgrader-core
+    state: absent
+
+
 - name: Install packages to allow APT to use repositories over HTTPS
   apt: pkg={{ item }} state=installed
   with_items:
@@ -49,7 +58,7 @@
   - python3
   - python3-pip
   - bash-completion
- 
+
 #- name: Install Micro editor (step 1 of 2)
 #  copy: src=install_micro.sh dest=/root/install_micro.sh mode=0777
 
