@@ -59,6 +59,10 @@
   - python3-pip
   - bash-completion
 
+- name: Python alias for Python3
+  shell: "ln -s /usr/bin/python3 /usr/bin/python"
+
+
 #- name: Install Micro editor (step 1 of 2)
 #  copy: src=install_micro.sh dest=/root/install_micro.sh mode=0777
 
