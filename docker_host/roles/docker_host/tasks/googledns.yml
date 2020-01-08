@@ -1,0 +1,13 @@
+- debug:
+    msg: "Setting up Google DNS servers"
+
+- lineinfile:
+    dest: /etc/resolvconf/resolv.conf.d/base
+    line: 'nameserver 8.8.8.8'
+
+- lineinfile:
+    dest: /etc/resolvconf/resolv.conf.d/base
+    line: 'nameserver 8.8.4.4'
+
+- name: Load Google DNS servers into system
+  command: "resolvconf -u"
