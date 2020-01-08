@@ -1,6 +1,15 @@
 #
 # Common shared steps for all playbooks
 #
+#
+- name: Ubuntu18 -=- Stop ubuntu-release-upgrader
+  command: "killall check-new-release"
+
+- name: Ubuntu18 -=- Remove ubuntu-release-upgrader
+  apt:
+    pkg: ubuntu-release-upgrader-core
+    state: absent
+
 - name: Setting LV Timezone (step 1 of 2)
   file: path=/etc/localtime state=absent
 
@@ -24,15 +33,6 @@
 
 - name: Apply Aliases
   command: /root/aliases.sh
-
-- name: Ubuntu18 -=- Stop ubuntu-release-upgrader
-  command: "killall check-new-release"
-
-- name: Ubuntu18 -=- Remove ubuntu-release-upgrader
-  apt:
-    pkg: ubuntu-release-upgrader-core
-    state: absent
-
 
 - name: Install packages to allow APT to use repositories over HTTPS
   apt: pkg={{ item }} state=installed
