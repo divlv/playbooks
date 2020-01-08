@@ -21,7 +21,7 @@
 #
 ###########################################################################################
 #
-- include: googledns.yml
+#- include: googledns.yml
 - include: docker.yml
 - include: firewall.yml
 - include: reboot.yml
