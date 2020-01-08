@@ -22,6 +22,11 @@
 - debug:
     msg: "Place Firewall startup script into /etc/rc.local"
 
+- name: Create file if not exists
+  command: touch /etc/rc.local
+  args:
+    creates: /etc/rc.local
+
 - lineinfile:
     dest: "/etc/rc.local"
     regexp: '^(local[\s]+all[\s]+postgres[\s]+)peer([\s]*)$'
