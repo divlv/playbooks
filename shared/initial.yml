@@ -2,8 +2,9 @@
 # Common shared steps for all playbooks
 #
 #
-- name: Ubuntu18 -=- Stop ubuntu-release-upgrader
+- name: Ubuntu18 -=- Stop ubuntu-release-upgrader if any
   command: "killall check-new-release"
+  ignore_errors: true
 
 - name: Ubuntu18 -=- Remove ubuntu-release-upgrader
   apt:
