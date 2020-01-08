@@ -10,6 +10,7 @@
   apt:
     pkg: ubuntu-release-upgrader-core
     state: absent
+  ignore_errors: true
 
 - name: Setting LV Timezone (step 1 of 2)
   file: path=/etc/localtime state=absent
