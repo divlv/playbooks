@@ -22,10 +22,15 @@
 - debug:
     msg: "Place Firewall startup script into /etc/rc.local"
 
-- name: Create file if not exists
+- name: Ubuntu18 -=- Create file if not exists
   command: touch /etc/rc.local
   args:
     creates: /etc/rc.local
+
+- lineinfile:
+    dest: "/etc/rc.local"
+    insertbefore: BOF
+    line: '#!/bin/sh -e'
 
 - lineinfile:
     dest: "/etc/rc.local"
@@ -33,6 +38,8 @@
     insertafter: '^# This script'
     line: '/root/iptables.sh'
 
+- name: Make startup script executable
+  shell: "chmod 777 /etc/rc.local"
 
 - name: Apply Firewall settings
   command: /root/iptables.sh
