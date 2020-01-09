@@ -4,6 +4,8 @@
 # Erase all firewall rules
 iptables -F
 iptables -X
+# Erase NAT rules as well
+iptables -t nat -F
 
 #
 # Default policy: block all incoming
@@ -17,16 +19,21 @@ iptables -P OUTPUT ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
 
+# DOCKER PART #####################################################################
 #
 # DOCKER: allow exposing ports, but respect IPTABLES rules:
 iptables -A FORWARD -i docker0 -o eth0 -j ACCEPT
-iptables -A FORWARD -i eth0 -o docker0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o docker0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 #
 # Wildcard rule for Docker/User bridge networks, e.g. "br-f985e578d3a0"
 iptables -A FORWARD -i br-+ -o eth0 -j ACCEPT
-iptables -A FORWARD -i eth0 -o br-+ -j ACCEPT
+iptables -A FORWARD -i eth0 -o br-+ -m state --state ESTABLISHED,RELATED -j ACCEPT
+# 
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 #
-
+# This opens Container's forwarding on new (U18) systems, 
+# and works like simply iptables forwarding between 2 interfaces
+#
 # MAIN PART ######################################################################
 
 # Web server traffic
