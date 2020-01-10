@@ -21,6 +21,8 @@ iptables -A OUTPUT -o lo -j ACCEPT
 
 # DOCKER PART #####################################################################
 #
+# IP forwarding should be enabled:: sysctl -w net.ipv4.ip_forward=1
+#
 # DOCKER: allow exposing ports, but respect IPTABLES rules:
 iptables -A FORWARD -i docker0 -o eth0 -j ACCEPT
 iptables -A FORWARD -i eth0 -o docker0 -m state --state ESTABLISHED,RELATED -j ACCEPT
