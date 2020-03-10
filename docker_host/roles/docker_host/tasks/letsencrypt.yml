@@ -1,0 +1,6 @@
+#
+- name: LetsEncrypt -=- Install LetsEncrypt package
+  apt: pkg=letsencrypt state=present
+
+- name: LetsEncrypt -=- Create dhparam.pem (2048)
+  command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048

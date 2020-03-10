@@ -24,6 +24,7 @@
 #- include: googledns.yml
 - include: docker.yml
 - include: firewall.yml
+- include: letsencrypt.yml
 - include: reboot.yml
 #
 # Create Portainer instance for Docker Host:
