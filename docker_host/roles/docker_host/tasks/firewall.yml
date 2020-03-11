@@ -15,6 +15,9 @@
 - name: Copy Firewall settings script
   copy: src=iptables.sh dest=/root/iptables.sh mode=0777
 
+- name: Copy Firewall open script
+  copy: src=iptables_open.sh dest=/root/iptables_open.sh mode=0700
+
 #- name: Make Firewall start at boot
 #  copy: src=firewall_on.sh dest=/etc/network/if-pre-up.d/firewall_on.sh mode=0777
 
