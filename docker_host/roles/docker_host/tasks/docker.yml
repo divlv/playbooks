@@ -13,6 +13,19 @@
     line: 'vm.max_map_count = 262144'
 
 - debug:
+    msg: "Adjusting Linux file max setting for ELK, if needed for Docker image:"
+
+- lineinfile:
+    dest: /etc/sysctl.conf
+    line: 'fs.file-max = 65536'
+
+- name: ULimit settings (1 of 2)
+  shell: "ulimit -n 65536"
+
+- name: ULimit settings (2 of 2)
+  shell: "ulimit -u 4096"
+
+- debug:
     msg: "Enable IPv6 port binding for Docker (step 1 of 4)"
 
 - lineinfile:
@@ -65,29 +78,28 @@
 #
 # Copy sample docker build files:
 
-- name: Installing Docker extra packages
+- name: Installing Docker extra packages (e.g. Network related)
   apt: pkg={{ item }} state=installed
   with_items:
-  - osmctools
   - bridge-utils
+#  - osmctools
 
+#- debug:
+#    msg: "Copy sample docker build files..."
 
-- debug:
-    msg: "Copy sample docker build files..."
+#- name: Create Docker build directory
+#  file: path={{ docker_dir }}
+#        state=directory
+#        mode=0775
 
-- name: Create Docker build directory
-  file: path={{ docker_dir }}
-        state=directory
-        mode=0775
+#- name: Copy Sample image config file
+#  copy: src=03-gelf-input.conf dest="{{ docker_dir }}/03-gelf-input.conf" mode=0666
 
-- name: Copy Sample image config file
-  copy: src=03-gelf-input.conf dest="{{ docker_dir }}/03-gelf-input.conf" mode=0666
+#- name: Copy Dockerfile
+#  copy: src=Dockerfile dest="{{ docker_dir }}/Dockerfile" mode=0666
 
-- name: Copy Dockerfile
-  copy: src=Dockerfile dest="{{ docker_dir }}/Dockerfile" mode=0666
-
-- name: Copy build script
-  copy: src=dockerbuild.sh dest="{{ docker_dir }}/dockerbuild.sh" mode=0777
+#- name: Copy build script
+#  copy: src=dockerbuild.sh dest="{{ docker_dir }}/dockerbuild.sh" mode=0777
 
 - name: Copy DOCKER network script
   template: src=createnetwork dest=/root/createnetwork mode=0755
