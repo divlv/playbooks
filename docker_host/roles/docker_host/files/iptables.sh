@@ -21,6 +21,8 @@ iptables -A OUTPUT -o lo -j ACCEPT
 
 # DOCKER PART #####################################################################
 #
+# IP forwarding should be enabled:: sysctl -w net.ipv4.ip_forward=1
+#
 # DOCKER: allow exposing ports, but respect IPTABLES rules:
 iptables -A FORWARD -i docker0 -o eth0 -j ACCEPT
 iptables -A FORWARD -i eth0 -o docker0 -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -67,6 +69,14 @@ iptables -A INPUT -p tcp -s 80.233.156.0/22 -m tcp --dport 19000 -j ACCEPT
 
 # Allow outgoing connections for previously established incoming connections
 iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# LOGGING: Log incoming blocked packets to /var/log/syslog  (e.g. --limit 20/min)
+# Uncomment, if needed
+#iptables -N LOGGING
+#iptables -A INPUT -j LOGGING
+#iptables -A LOGGING -m limit --limit 2/min -j LOG --log-prefix "IPTables-Dropped: " --log-level 4
+#iptables -A LOGGING -j DROP
+
 
 # List all rules and interfaces
 iptables -nv -L
