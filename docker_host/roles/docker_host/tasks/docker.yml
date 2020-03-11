@@ -21,9 +21,11 @@
 
 - name: ULimit settings (1 of 2)
   shell: "ulimit -n 65536"
+  ignore_errors: true
 
 - name: ULimit settings (2 of 2)
   shell: "ulimit -u 4096"
+  ignore_errors: true
 
 - debug:
     msg: "Enable IPv6 port binding for Docker (step 1 of 4)"
