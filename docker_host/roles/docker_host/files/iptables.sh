@@ -56,6 +56,8 @@ iptables -A INPUT -p tcp -s 80.233.156.0/22 -m multiport -m tcp --dports 22,2212
 # PostgreSQL
 iptables -A INPUT -p tcp -s 159.148.74.220 -m tcp --dport 5432 -j ACCEPT
 iptables -A INPUT -p tcp -s 80.233.156.0/22 -m tcp --dport 5432 -j ACCEPT
+# ...PG for on-host Docker containers (private IP range)
+iptables -A INPUT -p tcp -s 172.16.0.0/12 -m tcp --dport 15432 -j ACCEPT
 
 # Monit
 iptables -A INPUT -p tcp -s 159.148.74.220 -m tcp --dport 2812 -j ACCEPT
@@ -72,6 +74,7 @@ iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # LOGGING: Log incoming blocked packets to /var/log/syslog  (e.g. --limit 20/min)
 # Uncomment, if needed
+#
 #iptables -N LOGGING
 #iptables -A INPUT -j LOGGING
 #iptables -A LOGGING -m limit --limit 2/min -j LOG --log-prefix "IPTables-Dropped: " --log-level 4
