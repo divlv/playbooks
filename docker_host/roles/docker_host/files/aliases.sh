@@ -21,4 +21,5 @@ echo "alias dstop='docker stop $(docker ps -aq)'" >> ~/.bash_aliases && source ~
 #IP Tables: detailed report
 echo "alias iptl='iptables -nv -L'" >> ~/.bash_aliases && source ~/.bash_aliases
 
-
+#Check if particular port is opened: checkport ya.ru 443
+echo "alias checkport='nc -w5 -z -v '" >> ~/.bash_aliases && source ~/.bash_aliases
