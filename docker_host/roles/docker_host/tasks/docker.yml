@@ -5,6 +5,12 @@
     state: present
     update_cache: yes
 
+- name: Install Docker Compose
+  apt:
+    name: docker-compose
+    state: present
+    update_cache: yes
+
 - debug:
     msg: "Adjusting Linux virtual memory setting for ELK, if needed for Docker image:"
 
