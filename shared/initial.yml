@@ -47,7 +47,6 @@
 - name: Misc apps
   apt: pkg={{ item }} state=installed
   with_items:
-  - nc
   - mc
   - ncdu
   - git
