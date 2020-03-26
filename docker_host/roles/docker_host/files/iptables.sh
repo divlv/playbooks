@@ -43,28 +43,34 @@ iptables -A INPUT -p tcp -m multiport -m tcp --dports 80,443 -j ACCEPT
 
 # App server traffic from Home/Work
 iptables -A INPUT -p tcp -s 159.148.74.220 -m tcp --dport 8080 -j ACCEPT
+iptables -A INPUT -p tcp -s 185.81.51.167 -m tcp --dport 8080 -j ACCEPT
 iptables -A INPUT -p tcp -s 80.233.156.0/22 -m tcp --dport 8080 -j ACCEPT
 
 # Wildfly App server Administration traffic from Home/Work
 iptables -A INPUT -p tcp -s 159.148.74.220 -m tcp --dport 9990 -j ACCEPT
+iptables -A INPUT -p tcp -s 185.81.51.167 -m tcp --dport 9990 -j ACCEPT
 iptables -A INPUT -p tcp -s 80.233.156.0/22 -m tcp --dport 9990 -j ACCEPT
 
 # SSH Home (including Ansible hub)
 iptables -A INPUT -p tcp -s 159.148.74.220 -m multiport -m tcp --dports 22,22122 -j ACCEPT
+iptables -A INPUT -p tcp -s 185.81.51.167 -m multiport -m tcp --dports 22,22122 -j ACCEPT
 iptables -A INPUT -p tcp -s 80.233.156.0/22 -m multiport -m tcp --dports 22,22122 -j ACCEPT
 
 # PostgreSQL
 iptables -A INPUT -p tcp -s 159.148.74.220 -m tcp --dport 5432 -j ACCEPT
+iptables -A INPUT -p tcp -s 185.81.51.167 -m tcp --dport 5432 -j ACCEPT
 iptables -A INPUT -p tcp -s 80.233.156.0/22 -m tcp --dport 5432 -j ACCEPT
 # ...PG for on-host Docker containers (private IP range)
 iptables -A INPUT -p tcp -s 172.16.0.0/12 -m tcp --dport 15432 -j ACCEPT
 
 # Monit
 iptables -A INPUT -p tcp -s 159.148.74.220 -m tcp --dport 2812 -j ACCEPT
+iptables -A INPUT -p tcp -s 185.81.51.167 -m tcp --dport 2812 -j ACCEPT
 iptables -A INPUT -p tcp -s 80.233.156.0/22 -m tcp --dport 2812 -j ACCEPT
 
 # Portainer
 iptables -A INPUT -p tcp -s 159.148.74.220 -m tcp --dport 19000 -j ACCEPT
+iptables -A INPUT -p tcp -s 185.81.51.167 -m tcp --dport 19000 -j ACCEPT
 iptables -A INPUT -p tcp -s 80.233.156.0/22 -m tcp --dport 19000 -j ACCEPT
 
 ##################################################################################
