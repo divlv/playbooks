@@ -23,3 +23,6 @@ echo "alias iptl='iptables -nv -L'" >> ~/.bash_aliases && source ~/.bash_aliases
 
 #Check if particular port is opened: checkport ya.ru 443
 echo "alias checkport='nc -w5 -z -v '" >> ~/.bash_aliases && source ~/.bash_aliases
+
+#Get current server external IP
+echo "alias myip='dig +short myip.opendns.com @resolver1.opendns.com'" >> ~/.bash_aliases && source ~/.bash_aliases
