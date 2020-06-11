@@ -27,8 +27,8 @@
 - name: Release APT lock if any (2 of 2)
   command: rm -f /var/cache/apt/archives/lock
 
-- name: Update APT
-  command: apt-get update
+#- name: Update APT
+#  command: apt-get update
 
 - name: Preparing Aliases script
   copy: src=aliases.sh dest=/root/aliases.sh mode=0777
@@ -37,7 +37,7 @@
   command: /root/aliases.sh
 
 - name: Install packages to allow APT to use repositories over HTTPS
-  apt: pkg={{ item }} state=installed
+  apt: pkg={{ item }} state=installed update_cache=yes
   with_items:
   - apt-transport-https
   - ca-certificates
@@ -61,13 +61,10 @@
   - python3-pip
   - bash-completion
   - ipset
+  - gnupg2
+  - pass
+  - netcat
 
 - name: Python alias for Python3
   shell: "ln -s /usr/bin/python3 /usr/bin/python"
-
-
-#- name: Install Micro editor (step 1 of 2)
-#  copy: src=install_micro.sh dest=/root/install_micro.sh mode=0777
-
-#- name: Install Micro editor (step 2 of 2)
-#  command: /root/install_micro.sh
+  ignore_errors: true
