@@ -64,6 +64,7 @@
   - gnupg2
   - pass
   - netcat
+  - ioping
 
 - name: Python alias for Python3
   shell: "ln -s /usr/bin/python3 /usr/bin/python"
