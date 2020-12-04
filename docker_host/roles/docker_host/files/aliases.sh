@@ -9,8 +9,8 @@ echo "alias getsize='du -a -h --max-depth=1'" >> ~/.bash_aliases && source ~/.ba
 #Adding file find command alias
 echo "alias ffind='find / -name '" >> ~/.bash_aliases && source ~/.bash_aliases
 
-#Adding open ports display command alias
-echo "alias ports='netstat -anltp | grep LISTEN'" >> ~/.bash_aliases && source ~/.bash_aliases
+#Adding open ports (TCP and UDP) display command alias
+echo "alias ports='netstat -anltpu | grep -E udp\|LISTEN'" >> ~/.bash_aliases && source ~/.bash_aliases
 
 #Adding all ports in use display command alias
 echo "alias portsa='netstat -anltp'" >> ~/.bash_aliases && source ~/.bash_aliases
