@@ -25,6 +25,13 @@
     dest: /etc/sysctl.conf
     line: 'fs.file-max = 65536'
 
+- debug:
+    msg: "Prevent Crashplan back-up service error: Failed to add /run/systemd/ask-password to directory watch: No space left on device"
+
+- lineinfile:
+    dest: /etc/sysctl.conf
+    line: 'fs.inotify.max_user_watches=1048576'
+
 - name: ULimit settings (1 of 2)
   shell: "ulimit -n 65536"
   ignore_errors: true
@@ -114,4 +121,3 @@
 
 - name: Create DOCKER Network
   command: /root/createnetwork
-
