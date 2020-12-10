@@ -56,6 +56,10 @@ ipset -A trustednets 172.16.0.0/12
 # Web server traffic
 iptables -A INPUT -p tcp -m multiport -m tcp --dports 80,443 -j ACCEPT
 
+# [temporary] GrayLog Server (Security through obscurity. Original port - 12201)
+iptables -A INPUT -p tcp -m multiport -m tcp --dports 12250,12251 -j ACCEPT
+iptables -A INPUT -p udp -m multiport -m udp --dports 12250,12251 -j ACCEPT
+
 # Trusted
 iptables -A INPUT -p tcp -m multiport -m tcp -m set --match-set trustedips src --dports 22,2812,19000,18000,8080,9000,9090,9990,5432,15432,9323,6379,9273 -j ACCEPT
 iptables -A INPUT -p tcp -m multiport -m tcp -m set --match-set trustednets src --dports 22,2812,19000,18000,8080,9000,9090,9990,5432,15432,9323,6379,9273 -j ACCEPT
