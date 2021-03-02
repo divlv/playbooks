@@ -51,6 +51,65 @@ ipset -A trustednets 194.8.32.0/21
 ipset -A trustednets 194.8.40.0/22
 # ...PG for on-host Docker containers (private IP range)
 ipset -A trustednets 172.16.0.0/12
+# GitLab CI/CD
+ipset -A trustednets 8.34.208.0/20
+ipset -A trustednets 8.35.192.0/21
+ipset -A trustednets 8.35.200.0/23
+ipset -A trustednets 23.236.48.0/20
+ipset -A trustednets 23.251.128.0/19
+ipset -A trustednets 34.64.0.0/11
+ipset -A trustednets 34.96.0.0/14
+ipset -A trustednets 34.100.0.0/16
+ipset -A trustednets 34.102.0.0/15
+ipset -A trustednets 34.104.0.0/14
+ipset -A trustednets 34.124.0.0/18
+ipset -A trustednets 34.124.64.0/20
+ipset -A trustednets 34.124.80.0/23
+ipset -A trustednets 34.124.84.0/22
+ipset -A trustednets 34.124.88.0/23
+ipset -A trustednets 34.124.92.0/22
+ipset -A trustednets 34.125.0.0/16
+ipset -A trustednets 35.184.0.0/14
+ipset -A trustednets 35.188.0.0/15
+ipset -A trustednets 35.190.0.0/17
+ipset -A trustednets 35.190.128.0/18
+ipset -A trustednets 35.190.192.0/19
+ipset -A trustednets 35.190.224.0/20
+ipset -A trustednets 35.190.240.0/22
+ipset -A trustednets 35.192.0.0/14
+ipset -A trustednets 35.196.0.0/15
+ipset -A trustednets 35.198.0.0/16
+ipset -A trustednets 35.199.0.0/17
+ipset -A trustednets 35.199.128.0/18
+ipset -A trustednets 35.200.0.0/13
+ipset -A trustednets 35.208.0.0/13
+ipset -A trustednets 35.216.0.0/15
+ipset -A trustednets 35.219.192.0/24
+ipset -A trustednets 35.220.0.0/14
+ipset -A trustednets 35.224.0.0/13
+ipset -A trustednets 35.232.0.0/15
+ipset -A trustednets 35.234.0.0/16
+ipset -A trustednets 35.235.0.0/17
+ipset -A trustednets 35.235.192.0/20
+ipset -A trustednets 35.235.216.0/21
+ipset -A trustednets 35.235.224.0/20
+ipset -A trustednets 35.236.0.0/14
+ipset -A trustednets 35.240.0.0/13
+ipset -A trustednets 104.154.0.0/15
+ipset -A trustednets 104.196.0.0/14
+ipset -A trustednets 107.167.160.0/19
+ipset -A trustednets 107.178.192.0/18
+ipset -A trustednets 108.59.80.0/20
+ipset -A trustednets 108.170.192.0/20
+ipset -A trustednets 108.170.208.0/21
+ipset -A trustednets 108.170.216.0/22
+ipset -A trustednets 108.170.220.0/23
+ipset -A trustednets 108.170.222.0/24
+ipset -A trustednets 130.211.4.0/22
+ipset -A trustednets 130.211.8.0/21
+ipset -A trustednets 130.211.16.0/20
+ipset -A trustednets 130.211.32.0/19
+#####
 
 
 # Web server traffic
