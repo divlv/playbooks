@@ -121,3 +121,4 @@
 
 - name: Create DOCKER Network
   command: /root/createnetwork
+  ignore_errors: true
