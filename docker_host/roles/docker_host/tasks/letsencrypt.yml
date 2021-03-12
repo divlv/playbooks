@@ -4,3 +4,6 @@
 
 - name: LetsEncrypt -=- Create dhparam.pem (2048)
   command: openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+
+- name: LetsEncrypt -=- Copy sample certificate request script
+  template: src=sample_create_certificate dest="{{sample_certificate_dir}}/sample_create_certificate" mode=0755

@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# LetsEncrypt: Sample certificate script...
+#
+# Prepare temporary directory:
+rm -r -f /tmp/cert
+mkdir -p /tmp/cert/.well-known/acme-challenge
+
+HOST="domain.example.com"
+RUN="1"
+CERT_PATH="{{sample_certificate_dir}}"
+EMAIL="dima@zaharov.info"
+KEY_FILE_NAME="$HOST.key"
+CERTIFICATE_FILE_NAME="$HOST.crt"
+
+mkdir -p $CERT_PATH
+cd /tmp/cert
+
+# Stop all python processes (v.2, included in to Linux distro)
+killall python3
+
+# Start [debug] Python HTTP service (it needs only for couple of requests)
+python3 -m http.server 80 &
+
+# Actual certificate request:
+/usr/bin/letsencrypt certonly -n --text --agree-tos --expand --email $EMAIL --webroot -w /tmp/cert -d $HOST
+
+# Attention! Use FULLCHAIN1.PEM as certificate file. This eliminates remote Docker client error: tls: bad certificate.
+# However browsers didn't respond with this error anyway, but we need working Docker clients not browsers:
+#
+
+# Cleanup target directory:
+rm -f $CERT_PATH/$HOST.key
+rm -f $CERT_PATH/fullchain1.pem
+
+# Copy new files:
+cp /etc/letsencrypt/archive/$HOST/privkey$RUN.pem $CERT_PATH/$KEY_FILE_NAME
+cp /etc/letsencrypt/archive/$HOST/fullchain$RUN.pem $CERT_PATH/$CERTIFICATE_FILE_NAME
+
+# Shutdown Python web server
+killall python3
