@@ -24,33 +24,34 @@ iptables -A OUTPUT -o lo -j ACCEPT
 # IP forwarding should be enabled:: sysctl -w net.ipv4.ip_forward=1
 #
 # DOCKER: allow exposing ports, but respect IPTABLES rules:
-###iptables -A FORWARD -i docker0 -o eth0 -j ACCEPT
-###iptables -A FORWARD -i eth0 -o docker0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -i docker0 -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o docker0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 #
 # Wildcard rule for Docker/User bridge networks, e.g. "br-f985e578d3a0"
-###iptables -A FORWARD -i br-+ -o eth0 -j ACCEPT
-###iptables -A FORWARD -i eth0 -o br-+ -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -i br-+ -o eth0 -j ACCEPT
+iptables -A FORWARD -i eth0 -o br-+ -m state --state ESTABLISHED,RELATED -j ACCEPT
 #
-###iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
-iptables -N DOCKER
-iptables -N DOCKER-ISOLATION-STAGE-1
-iptables -N DOCKER-ISOLATION-STAGE-2
-iptables -N DOCKER-USER
+# --------------Didn't worked last time. Left for reference...-----------
+#iptables -N DOCKER
+#iptables -N DOCKER-ISOLATION-STAGE-1
+#iptables -N DOCKER-ISOLATION-STAGE-2
+#iptables -N DOCKER-USER
 
-iptables -A FORWARD -j DOCKER-USER
-iptables -A FORWARD -j DOCKER-ISOLATION-STAGE-1
-iptables -A FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
-iptables -A FORWARD -o docker0 -j DOCKER
-iptables -A FORWARD -i docker0 ! -o docker0 -j ACCEPT
-iptables -A FORWARD -i docker0 -o docker0 -j ACCEPT
+#iptables -A FORWARD -j DOCKER-USER
+#iptables -A FORWARD -j DOCKER-ISOLATION-STAGE-1
+#iptables -A FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+#iptables -A FORWARD -o docker0 -j DOCKER
+#iptables -A FORWARD -i docker0 ! -o docker0 -j ACCEPT
+#iptables -A FORWARD -i docker0 -o docker0 -j ACCEPT
 
-iptables -A DOCKER-ISOLATION-STAGE-1 -i docker0 ! -o docker0 -j DOCKER-ISOLATION-STAGE-2
-iptables -A DOCKER-ISOLATION-STAGE-1 -j RETURN
-iptables -A DOCKER-ISOLATION-STAGE-2 -o docker0 -j DROP
-iptables -A DOCKER-ISOLATION-STAGE-2 -j RETURN
-iptables -A DOCKER-USER -j RETURN
-
+#iptables -A DOCKER-ISOLATION-STAGE-1 -i docker0 ! -o docker0 -j DOCKER-ISOLATION-STAGE-2
+#iptables -A DOCKER-ISOLATION-STAGE-1 -j RETURN
+#iptables -A DOCKER-ISOLATION-STAGE-2 -o docker0 -j DROP
+#iptables -A DOCKER-ISOLATION-STAGE-2 -j RETURN
+#iptables -A DOCKER-USER -j RETURN
+# ----------------------------------------------------------------------
 
 #
 # This opens Container's forwarding on new (U18) systems,
