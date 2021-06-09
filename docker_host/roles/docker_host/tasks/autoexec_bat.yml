@@ -1,0 +1,19 @@
+- name: Autoexec.bat -=- Copy Autoexec script for future use
+  template: src=autoexec.bat dest=/root/autoexec.bat mode=0777
+
+- name: Autoexec.bat -=- Add script for auto-starting by CRON
+  cron:
+    name: "autoexec.bat"
+    reboot: True
+    job: "/root/autoexec.bat"
+
+- cron:
+    name: "fake_job_closer"
+    state: absent
+
+- name: 'All Docker machines -=- Closing cron file properly'
+  cron:
+    name: "fake_job_closer"
+    minute: "28"
+    hour: "5"
+    job: "date > /dev/null"
