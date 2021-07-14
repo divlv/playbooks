@@ -70,6 +70,11 @@ ipset -N trustednets nethash
 ipset -A trustednets 80.233.156.0/22
 ipset -A trustednets 194.8.32.0/21
 ipset -A trustednets 194.8.40.0/22
+#
+# FIXME: Temporary! To be removed!!!
+ipset -A trustednets 77.219.0.0/19
+#
+#
 # ...PG for on-host Docker containers (private IP range)
 ipset -A trustednets 172.16.0.0/12
 # GitLab CI/CD
