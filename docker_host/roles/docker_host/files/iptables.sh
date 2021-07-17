@@ -71,7 +71,7 @@ ipset -A trustednets 80.233.156.0/22
 ipset -A trustednets 194.8.32.0/21
 ipset -A trustednets 194.8.40.0/22
 #
-# FIXME: Temporary! To be removed!!!
+# FIXME: Temporary! To be removed!!! (TELE2 mob.)
 ipset -A trustednets 77.219.0.0/19
 #
 #
@@ -139,7 +139,7 @@ ipset -A trustednets 130.211.32.0/19
 
 
 # Web server traffic
-iptables -A INPUT -p tcp -m multiport -m tcp --dports 80,443 -j ACCEPT
+iptables -A INPUT -p tcp -m multiport -m tcp --dports 80,443,1080 -j ACCEPT
 
 # [temporary] GrayLog Server (Security through obscurity. Original port - 12201)
 iptables -A INPUT -p tcp -m multiport -m tcp --dports 12250,12251 -j ACCEPT

@@ -26,3 +26,5 @@ echo "alias checkport='nc -w5 -z -v '" >> ~/.bash_aliases && source ~/.bash_alia
 
 #Get current server external IP
 echo "alias myip='dig +short myip.opendns.com @resolver1.opendns.com'" >> ~/.bash_aliases && source ~/.bash_aliases
+
+cp ~/.bash_aliases ~/.bashrc
