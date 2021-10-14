@@ -63,6 +63,11 @@ ipset destroy trustedips
 ipset -N trustedips iphash
 #
 ipset -A trustedips 185.81.51.167
+#
+# Sometimes it needs to make requests to/from the same machine via Domain Name.
+# That's why own external IP should be opened:
+#IP_OF_CURRENT_MACHINE_IF_NEEDED
+#
 ###
 ipset destroy trustednets
 ipset -N trustednets nethash
