@@ -63,6 +63,9 @@ ipset destroy trustedips
 ipset -N trustedips iphash
 #
 ipset -A trustedips 185.81.51.167
+
+#ForumIP
+
 #
 # Sometimes it needs to make requests to/from the same machine via Domain Name.
 # That's why own external IP should be opened:
@@ -77,7 +80,7 @@ ipset -A trustednets 194.8.32.0/21
 ipset -A trustednets 194.8.40.0/22
 #
 # FIXME: Temporary! To be removed!!! (TELE2 mob.)
-ipset -A trustednets 77.219.0.0/19
+#ipset -A trustednets 77.219.0.0/19
 #
 #
 # ...PG for on-host Docker containers (private IP range)
