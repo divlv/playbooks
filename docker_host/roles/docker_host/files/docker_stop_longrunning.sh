@@ -5,5 +5,5 @@
 #
 export CONTAINERFILTER=mssql
 #
-docker ps --format="{{.RunningFor}} {{.Names}} {{.Image}}" | grep $CONTAINERFILTER | grep minutes |  awk -F: '{if($1>2)print$1}' | awk ' {print $4} ' | xargs docker stop
+docker ps --format="{{.RunningFor}} {{.Names}} {{.Image}}" | grep $CONTAINERFILTER | grep minutes |  awk -F: '{if($1>2)print$1}' | awk ' {print $4} ' | xargs docker kill
 #
