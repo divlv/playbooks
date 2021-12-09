@@ -1,0 +1,5 @@
+# Test maintenance CRON file
+
+*/3 * * * * /root/docker_stop_longrunning.sh 1>/dev/null 2>/dev/null
+
+#
