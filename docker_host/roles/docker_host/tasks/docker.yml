@@ -113,8 +113,8 @@
 #- name: Copy Dockerfile
 #  copy: src=Dockerfile dest="{{ docker_dir }}/Dockerfile" mode=0666
 
-#- name: Copy build script
-#  copy: src=dockerbuild.sh dest="{{ docker_dir }}/dockerbuild.sh" mode=0777
+- name: Copy Docker maintenance script
+  copy: src=docker_stop_longrunning.sh dest=/root/docker_stop_longrunning.sh mode=0777
 
 - name: Copy DOCKER network script
   template: src=createnetwork dest=/root/createnetwork mode=0755
