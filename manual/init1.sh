@@ -34,7 +34,7 @@ apt install -y curl
 apt install -y mc
 apt install -y ncdu
 
-apt install openssh-server
+apt install -y openssh-server
 systemctl enable ssh
 systemctl start ssh
 
