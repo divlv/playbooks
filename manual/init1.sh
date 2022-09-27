@@ -32,6 +32,7 @@ apt update
 apt install -y net-tools
 apt install -y curl
 apt install -y mc
+apt install -y htop
 apt install -y ncdu
 
 apt install -y openssh-server
@@ -39,4 +40,4 @@ systemctl enable ssh
 systemctl start ssh
 
 
-hostnamectl set-hostname ???.v1.lv
+# hostnamectl set-hostname ???.v1.lv
