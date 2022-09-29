@@ -31,6 +31,7 @@ apt update
 
 apt install -y net-tools
 apt install -y curl
+apt install -y ipset
 apt install -y mc
 apt install -y htop
 apt install -y ncdu
