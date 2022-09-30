@@ -34,6 +34,7 @@ apt install -y curl
 apt install -y ipset
 apt install -y mc
 apt install -y htop
+apt install -y xprintidle
 apt install -y ncdu
 
 apt install -y openssh-server
