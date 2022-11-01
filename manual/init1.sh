@@ -43,3 +43,4 @@ systemctl start ssh
 
 
 # hostnamectl set-hostname ???.v1.lv
+#

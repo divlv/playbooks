@@ -24,3 +24,5 @@ apt install -y jitsi-meet
 # Then better reboot the system and add LetsEncrypt certificate:
 # sudo /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh
 # And reboot again
+
+#
