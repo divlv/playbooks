@@ -22,13 +22,14 @@
     state: link
 
 - name: Release APT lock if any (1 of 2)
-  command: rm -f /var/lib/apt/lists/lock
+  ansible.builtin.file:
+    path: /var/lib/apt/lists/lock
+    state: absent
 
 - name: Release APT lock if any (2 of 2)
-  command: rm -f /var/cache/apt/archives/lock
-
-#- name: Update APT
-#  command: apt-get update
+  ansible.builtin.file:
+    path: /var/cache/apt/archives/lock
+    state: absent
 
 - name: Preparing Aliases script
   copy: src=aliases.sh dest=/root/aliases.sh mode=0777
@@ -37,34 +38,36 @@
   command: /root/aliases.sh
 
 - name: Install packages to allow APT to use repositories over HTTPS
-  apt: pkg={{ item }} state=installed update_cache=yes
-  with_items:
-  - apt-transport-https
-  - ca-certificates
-  - curl
-  - software-properties-common
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    update_cache: yes
 
 - name: Misc apps
-  apt: pkg={{ item }} state=installed
-  with_items:
-  - mc
-  - ncdu
-  - git
-  - htop
-  - psmisc
-  - wput
-  - zip
-  - unzip
-  - swatch
-  - resolvconf
-  - python3
-  - python3-pip
-  - bash-completion
-  - ipset
-  - gnupg2
-  - pass
-  - netcat
-  - ioping
+  ansible.builtin.apt:
+    pkg:
+      - mc
+      - ncdu
+      - git
+      - htop
+      - psmisc
+      - wput
+      - zip
+      - unzip
+      - swatch
+      - resolvconf
+      - python3
+      - python3-pip
+      - bash-completion
+      - ipset
+      - gnupg2
+      - pass
+      - netcat
+      - ioping
+    update_cache: yes
 
 - name: Python alias for Python3
   shell: "ln -s /usr/bin/python3 /usr/bin/python"
