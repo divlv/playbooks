@@ -15,8 +15,8 @@
     url: https://raw.githubusercontent.com/divlv/playbooks/master/shared/initial.yml
     dest: /tmp/initial.yml
 
-- include: /tmp/initial.yml
-  static: no
+- include_tasks: /tmp/initial.yml
+
 #
 ###########################################################################################
 #
