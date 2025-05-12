@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #
-# JITSI - System initialization script
+# Init commands for K3s server...
 #
 
 echo "alias getsize='du -a -h --max-depth=1'" >> /root/.bash_aliases
@@ -29,18 +29,6 @@ apt-add-repository -y universe
 
 apt update
 
-apt install -y net-tools
-apt install -y curl
-apt install -y ipset
-apt install -y mc
-apt install -y htop
-apt install -y xprintidle
 apt install -y ncdu
 
-apt install -y openssh-server
-systemctl enable ssh
-systemctl start ssh
-
-
-# hostnamectl set-hostname ???.v1.lv
 #
