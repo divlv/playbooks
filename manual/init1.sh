@@ -13,15 +13,6 @@ echo "alias iptl='iptables -nv -L'" >> /root/.bash_aliases
 echo "alias checkport='nc -w5 -z -v '" >> /root/.bash_aliases
 echo "alias myip='dig +short myip.opendns.com @resolver1.opendns.com'" >> /root/.bash_aliases
 
-echo "alias getsize='du -a -h --max-depth=1'" >> /home/administrator/.bash_aliases
-echo "alias ffind='find / -name '" >> /home/administrator/.bash_aliases
-echo "alias ports='netstat -anltpu | grep -E udp\|LISTEN'" >> /home/administrator/.bash_aliases
-echo "alias portsa='netstat -anltp'" >> /home/administrator/.bash_aliases
-echo "alias dstop='docker stop '" >> /home/administrator/.bash_aliases
-echo "alias iptl='iptables -nv -L'" >> /home/administrator/.bash_aliases
-echo "alias checkport='nc -w5 -z -v '" >> /home/administrator/.bash_aliases
-echo "alias myip='dig +short myip.opendns.com @resolver1.opendns.com'" >> /home/administrator/.bash_aliases
-
 apt update
 
 apt install -y apt-transport-https
