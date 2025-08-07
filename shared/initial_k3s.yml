@@ -36,6 +36,5 @@
       - ipset
       - gnupg2
       - pass
-      - netcat
       - ioping
     update_cache: yes
