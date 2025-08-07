@@ -1,0 +1,60 @@
+#
+# Common shared steps for all playbooks
+#
+#
+- name: Ubuntu -=- Stop ubuntu-release-upgrader if any ignore errors
+  command: "killall check-new-release"
+  ignore_errors: true
+
+- name: Ubuntu -=- Remove ubuntu-release-upgrader
+  apt:
+    pkg: ubuntu-release-upgrader-core
+    state: absent
+  ignore_errors: true
+
+- name: Setting LV Timezone (step 1 of 2)
+  file: path=/etc/localtime state=absent
+
+- name: Setting LV Timezone (step 2 of 2)
+  file:
+    src: /usr/share/zoneinfo/Europe/Riga
+    dest: /etc/localtime
+    state: link
+
+- name: Release APT lock if any (1 of 2)
+  ansible.builtin.file:
+    path: /var/lib/apt/lists/lock
+    state: absent
+
+- name: Release APT lock if any (2 of 2)
+  ansible.builtin.file:
+    path: /var/cache/apt/archives/lock
+    state: absent
+
+- name: Install packages to allow APT to use repositories over HTTPS
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    update_cache: yes
+
+- name: Misc apps
+  ansible.builtin.apt:
+    pkg:
+      - mc
+      - ncdu
+      - htop
+      - psmisc
+      - wput
+      - zip
+      - unzip
+      - resolvconf
+      - bash-completion
+      - ipset
+      - gnupg2
+      - pass
+      - netcat
+      - ioping
+    update_cache: yes
