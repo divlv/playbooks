@@ -2,16 +2,6 @@
 # Common shared steps for all playbooks
 #
 #
-- name: Ubuntu -=- Stop ubuntu-release-upgrader if any ignore errors
-  command: "killall check-new-release"
-  ignore_errors: true
-
-- name: Ubuntu -=- Remove ubuntu-release-upgrader
-  apt:
-    pkg: ubuntu-release-upgrader-core
-    state: absent
-  ignore_errors: true
-
 - name: Setting LV Timezone (step 1 of 2)
   file: path=/etc/localtime state=absent
 
