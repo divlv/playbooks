@@ -31,15 +31,6 @@
     path: /var/cache/apt/archives/lock
     state: absent
 
-- name: Install packages to allow APT to use repositories over HTTPS
-  ansible.builtin.apt:
-    pkg:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - software-properties-common
-    update_cache: yes
-
 - name: Misc apps
   ansible.builtin.apt:
     pkg:
