@@ -15,7 +15,7 @@ echo "alias myip='dig +short myip.opendns.com @resolver1.opendns.com'" >> /root/
 
 apt update
 
-apt install -y apt-transport-https
+apt install -y apt-transport-https netcat
 apt-add-repository -y universe
 
 apt update
