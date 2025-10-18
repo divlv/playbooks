@@ -1,0 +1,40 @@
+#
+# Common shared steps for all playbooks
+#
+#
+- name: Setting LV Timezone (step 1 of 2)
+  file: path=/etc/localtime state=absent
+
+- name: Setting LV Timezone (step 2 of 2)
+  file:
+    src: /usr/share/zoneinfo/Europe/Riga
+    dest: /etc/localtime
+    state: link
+
+- name: Release APT lock if any (1 of 2)
+  ansible.builtin.file:
+    path: /var/lib/apt/lists/lock
+    state: absent
+
+- name: Release APT lock if any (2 of 2)
+  ansible.builtin.file:
+    path: /var/cache/apt/archives/lock
+    state: absent
+
+- name: Misc apps
+  ansible.builtin.apt:
+    pkg:
+      - mc
+      - ncdu
+      - htop
+      - psmisc
+      - wput
+      - zip
+      - unzip
+      - resolvconf
+      - bash-completion
+      - ipset
+      - gnupg2
+      - pass
+      - ioping
+    update_cache: yes
