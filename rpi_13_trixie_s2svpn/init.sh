@@ -6,4 +6,4 @@
 
 sudo apt update
 
-sudo apt install -y strongswan strongswan-pki strongswan-starter netcat mc ncdu tcpdump
+sudo apt install -y strongswan strongswan-pki strongswan-starter iproute2 netcat mc ncdu tcpdump
