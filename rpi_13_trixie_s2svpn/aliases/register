@@ -24,14 +24,14 @@ rm -f /usr/bin/myip
 # Create part:
 
 # Copy the new scripts to the /usr/bin directory
-cp /opt/install/tools/getsize /usr/bin/getsize
-cp /opt/install/tools/ffind /usr/bin/ffind
-cp /opt/install/tools/ports /usr/bin/ports
-cp /opt/install/tools/portsa /usr/bin/portsa
-cp /opt/install/tools/dstop /usr/bin/dstop
-cp /opt/install/tools/iptl /usr/bin/iptl
-cp /opt/install/tools/checkport /usr/bin/checkport
-cp /opt/install/tools/myip /usr/bin/myip
+cp ./getsize /usr/bin/getsize
+cp ./ffind /usr/bin/ffind
+cp ./ports /usr/bin/ports
+cp ./portsa /usr/bin/portsa
+cp ./dstop /usr/bin/dstop
+cp ./iptl /usr/bin/iptl
+cp ./checkport /usr/bin/checkport
+cp ./myip /usr/bin/myip
 
 # Make scripts executable
 chmod +x /usr/bin/getsize
