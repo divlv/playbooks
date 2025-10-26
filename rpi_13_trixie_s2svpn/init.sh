@@ -6,4 +6,19 @@
 
 sudo apt update
 
-sudo apt install -y strongswan strongswan-pki strongswan-starter iproute2 netcat-openbsd mc ncdu tcpdump
+sudo apt install -y strongswan strongswan-pki strongswan-starter iproute2 netcat-openbsd dnsutils mc ncdu tcpdump
+
+# Create IP-forwarding rule
+sudo tee /etc/sysctl.d/99-ipforward.conf >/dev/null <<'EOF'
+# Enable IPv4 forwarding permanently
+net.ipv4.ip_forward=1
+# Optional: enable IPv6 forwarding too
+#net.ipv6.conf.all.forwarding=1
+
+# Optional: Disable ICMP redirects (security)
+#net.ipv4.conf.all.accept_redirects=0
+#net.ipv4.conf.all.send_redirects=0
+
+EOF
+
+# It's nice to reboot the system after making these changes
