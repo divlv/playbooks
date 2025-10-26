@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# dstop
+# English comment: Stop a Docker container by name or ID
+
+###############################################################################
+# Usage examples:
+#   ./dstop mycontainer          # stop container named 'mycontainer'
+#   ./dstop abc123               # stop container with ID abc123
+#   ./dstop --help               # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0 <container-name-or-id>"
+  echo
+  echo "Stops a Docker container."
+  echo "Runs: docker stop <container-name-or-id>"
+  exit 0
+fi
+
+# Required positional argument: container name or ID
+CONTAINER="$1"
+if [[ -z "$CONTAINER" ]]; then
+  echo "Error: <container-name-or-id> is required. Use --help for details." >&2
+  exit 1
+fi
+
+COMMAND_TO_EXECUTE="docker stop \"${CONTAINER}\""
+
+echo "Stopping Docker container '${CONTAINER}':"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE"
+echo "#########################################################################"
+
+# Execute the command
+eval "$COMMAND_TO_EXECUTE"

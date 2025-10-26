@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# checkport
+# English comment: Check if a port is open on a host
+
+###############################################################################
+# Usage examples:
+#   ./checkport example.com 80         # check if port 80 is open on example.com
+#   ./checkport 192.168.1.1 22         # check if SSH port is open
+#   ./checkport --help                 # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0 <host> <port>"
+  echo
+  echo "Checks if a port is open on a host."
+  echo "Runs: nc -w5 -z -v <host> <port>"
+  exit 0
+fi
+
+# Required positional arguments
+HOST="$1"
+PORT="$2"
+
+if [[ -z "$HOST" ]]; then
+  echo "Error: <host> is required. Use --help for details." >&2
+  exit 1
+fi
+
+if [[ -z "$PORT" ]]; then
+  echo "Error: <port> is required. Use --help for details." >&2
+  exit 1
+fi
+
+COMMAND_TO_EXECUTE="nc -w5 -z -v \"${HOST}\" \"${PORT}\""
+
+echo "Checking if port ${PORT} is open on ${HOST}:"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE"
+echo "#########################################################################"
+
+# Execute the command
+eval "$COMMAND_TO_EXECUTE"

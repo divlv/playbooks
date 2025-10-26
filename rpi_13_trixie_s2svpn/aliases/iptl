@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# iptl
+# English comment: List iptables rules in verbose mode
+
+###############################################################################
+# Usage examples:
+#   ./iptl                       # list iptables rules
+#   ./iptl --help                # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0"
+  echo
+  echo "Lists iptables rules with numeric addresses and verbose output."
+  echo "Runs: iptables -nv -L"
+  exit 0
+fi
+
+COMMAND_TO_EXECUTE="iptables -nv -L"
+
+echo "IPTables rules (verbose):"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE"
+echo "#########################################################################"
+
+# Execute the command
+eval "$COMMAND_TO_EXECUTE"

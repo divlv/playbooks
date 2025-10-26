@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# ports
+# English comment: Show listening TCP/UDP ports
+
+###############################################################################
+# Usage examples:
+#   ./ports                      # show listening ports
+#   ./ports --help               # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0"
+  echo
+  echo "Shows listening TCP/UDP ports."
+  echo "Runs: netstat -anltpu | grep -E 'udp|LISTEN'"
+  exit 0
+fi
+
+COMMAND_TO_EXECUTE="netstat -anltpu | grep -E 'udp|LISTEN'"
+
+echo "Listening TCP/UDP ports:"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE"
+echo "#########################################################################"
+
+# Execute the command
+eval "$COMMAND_TO_EXECUTE"

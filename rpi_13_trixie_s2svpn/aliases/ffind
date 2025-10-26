@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# ffind
+# English comment: Find files by name starting from root directory
+
+###############################################################################
+# Usage examples:
+#   ./ffind nginx.conf           # find nginx.conf in entire filesystem
+#   ./ffind "*.log"              # find all .log files
+#   ./ffind --help               # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0 <filename-pattern>"
+  echo
+  echo "Searches for files matching <filename-pattern> starting from root (/)."
+  echo "Runs: find / -name <filename-pattern>"
+  exit 0
+fi
+
+# Required positional argument: filename pattern
+PATTERN="$1"
+if [[ -z "$PATTERN" ]]; then
+  echo "Error: <filename-pattern> is required. Use --help for details." >&2
+  exit 1
+fi
+
+COMMAND_TO_EXECUTE="find / -name \"${PATTERN}\" 2>/dev/null"
+
+echo "Searching for files matching '${PATTERN}' from root:"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE"
+echo "#########################################################################"
+
+# Execute the command
+eval "$COMMAND_TO_EXECUTE"

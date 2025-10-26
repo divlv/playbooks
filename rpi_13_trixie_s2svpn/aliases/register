@@ -1,0 +1,48 @@
+#!/bin/bash
+
+echo "###################################################################"
+echo "Registering helper tools..."
+echo "###################################################################"
+
+
+# Don't forget to make the scripts executable via GIT: git add --chmod=+x <script-name>
+# Cleanup part:
+
+# Cleanup the old scripts if they exist
+rm -f /usr/bin/getsize
+rm -f /usr/bin/ffind
+rm -f /usr/bin/ports
+rm -f /usr/bin/portsa
+rm -f /usr/bin/dstop
+rm -f /usr/bin/iptl
+rm -f /usr/bin/checkport
+rm -f /usr/bin/myip
+
+
+#################################################
+
+# Create part:
+
+# Copy the new scripts to the /usr/bin directory
+cp /opt/install/tools/getsize /usr/bin/getsize
+cp /opt/install/tools/ffind /usr/bin/ffind
+cp /opt/install/tools/ports /usr/bin/ports
+cp /opt/install/tools/portsa /usr/bin/portsa
+cp /opt/install/tools/dstop /usr/bin/dstop
+cp /opt/install/tools/iptl /usr/bin/iptl
+cp /opt/install/tools/checkport /usr/bin/checkport
+cp /opt/install/tools/myip /usr/bin/myip
+
+# Make scripts executable
+chmod +x /usr/bin/getsize
+chmod +x /usr/bin/ffind
+chmod +x /usr/bin/ports
+chmod +x /usr/bin/portsa
+chmod +x /usr/bin/dstop
+chmod +x /usr/bin/iptl
+chmod +x /usr/bin/checkport
+chmod +x /usr/bin/myip
+
+echo "###################################################################"
+echo "Registration complete!"
+echo "###################################################################"

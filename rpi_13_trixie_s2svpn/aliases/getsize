@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# getsize
+# English comment: Show disk usage for all items in the current directory
+
+###############################################################################
+# Usage examples:
+#   ./getsize                    # show sizes in current directory
+#   ./getsize /var/log           # show sizes in /var/log
+#   ./getsize --help             # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0 [directory]"
+  echo
+  echo "Shows disk usage for all items (du -a -h --max-depth=1)."
+  echo "If no directory is specified, uses current directory."
+  exit 0
+fi
+
+# Optional directory argument
+TARGET_DIR="${1:-.}"
+
+COMMAND_TO_EXECUTE="du -a -h --max-depth=1 \"${TARGET_DIR}\""
+
+echo "Disk usage for '${TARGET_DIR}':"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE"
+echo "#########################################################################"
+
+# Execute the command
+eval "$COMMAND_TO_EXECUTE"

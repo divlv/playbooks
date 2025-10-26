@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# myip
+# English comment: Get your public IP address
+
+###############################################################################
+# Usage examples:
+#   ./myip                       # show your public IP
+#   ./myip --help                # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0"
+  echo
+  echo "Gets your public IP address using OpenDNS resolver."
+  echo "Runs: dig +short myip.opendns.com @resolver1.opendns.com"
+  exit 0
+fi
+
+COMMAND_TO_EXECUTE="dig +short myip.opendns.com @resolver1.opendns.com"
+
+echo "Your public IP address:"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE"
+echo "#########################################################################"
+
+# Execute the command
+eval "$COMMAND_TO_EXECUTE"

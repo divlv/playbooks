@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# portsa
+# English comment: Show all TCP connections and listening ports
+
+###############################################################################
+# Usage examples:
+#   ./portsa                     # show all TCP connections
+#   ./portsa --help              # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0"
+  echo
+  echo "Shows all TCP connections and listening ports."
+  echo "Runs: netstat -anltp"
+  exit 0
+fi
+
+COMMAND_TO_EXECUTE="netstat -anltp"
+
+echo "All TCP connections and listening ports:"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE"
+echo "#########################################################################"
+
+# Execute the command
+eval "$COMMAND_TO_EXECUTE"
