@@ -6,7 +6,10 @@
 
 sudo apt update
 
-sudo apt install -y strongswan strongswan-pki strongswan-starter iproute2 netcat-openbsd dnsutils mc ncdu tcpdump
+sudo apt install -y strongswan strongswan-pki strongswan-starter iproute2 netcat-openbsd dnsutils mc ncdu tcpdump dnsmasq
+
+# Prepare log directory for dnsmasq
+mkdir -p /opt/log
 
 # Create IP-forwarding rule
 sudo tee /etc/sysctl.d/99-ipforward.conf >/dev/null <<'EOF'
