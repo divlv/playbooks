@@ -17,6 +17,10 @@ rm -f /usr/bin/dstop
 rm -f /usr/bin/iptl
 rm -f /usr/bin/checkport
 rm -f /usr/bin/myip
+rm -f /usr/bin/link1down
+rm -f /usr/bin/link2down
+rm -f /usr/bin/linksdown
+rm -f /usr/bin/linklog
 
 
 #################################################
@@ -32,6 +36,10 @@ cp ./dstop /usr/bin/dstop
 cp ./iptl /usr/bin/iptl
 cp ./checkport /usr/bin/checkport
 cp ./myip /usr/bin/myip
+cp ./link1down /usr/bin/link1down
+cp ./link2down /usr/bin/link2down
+cp ./linksdown /usr/bin/linksdown
+cp ./linklog /usr/bin/linklog
 
 # Make scripts executable
 chmod +x /usr/bin/getsize
@@ -42,6 +50,10 @@ chmod +x /usr/bin/dstop
 chmod +x /usr/bin/iptl
 chmod +x /usr/bin/checkport
 chmod +x /usr/bin/myip
+chmod +x /usr/bin/link1down
+chmod +x /usr/bin/link2down
+chmod +x /usr/bin/linksdown
+chmod +x /usr/bin/linklog
 
 echo "###################################################################"
 echo "Registration complete!"

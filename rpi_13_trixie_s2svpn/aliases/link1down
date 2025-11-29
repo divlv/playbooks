@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# link1down
+# English comment: Bring down IPsec connection to Azure Gateway 1
+
+###############################################################################
+# Usage examples:
+#   ./link1down                  # bring down azure-gw1 connection
+#   ./link1down --help           # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0"
+  echo
+  echo "Brings down IPsec connection to Azure Gateway 1."
+  echo "Runs: ipsec down azure-gw1"
+  exit 0
+fi
+
+COMMAND_TO_EXECUTE="ipsec down azure-gw1"
+
+echo "Bringing down IPsec connection to Azure Gateway 1:"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE"
+echo "#########################################################################"
+
+# Execute the command
+eval "$COMMAND_TO_EXECUTE"

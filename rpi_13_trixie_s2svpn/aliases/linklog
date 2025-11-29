@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# linklog
+# English comment: Monitor IPsec connection logs in real-time
+
+###############################################################################
+# Usage examples:
+#   ./linklog                    # monitor IPsec failover and gateway logs
+#   ./linklog --help             # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0"
+  echo
+  echo "Monitors IPsec connection logs in real-time."
+  echo "Filters for azure-ipsec-failover and azure-gw1/gw2 entries."
+  echo "Runs: journalctl -u strongswan-starter -f | grep -E 'azure-ipsec-failover|azure-gw[12]'"
+  echo
+  echo "Press Ctrl+C to stop monitoring."
+  exit 0
+fi
+
+COMMAND_TO_EXECUTE="journalctl -u strongswan-starter -f | grep -E 'azure-ipsec-failover|azure-gw[12]'"
+
+echo "Monitoring IPsec connection logs (Ctrl+C to stop):"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE"
+echo "#########################################################################"
+
+# Execute the command
+eval "$COMMAND_TO_EXECUTE"

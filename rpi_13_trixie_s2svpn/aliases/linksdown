@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# linksdown
+# English comment: Bring down both IPsec connections to Azure Gateways
+
+###############################################################################
+# Usage examples:
+#   ./linksdown                  # bring down both azure-gw1 and azure-gw2
+#   ./linksdown --help           # usage info
+###############################################################################
+
+# Help / usage
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  echo "Usage: $0"
+  echo
+  echo "Brings down both IPsec connections to Azure Gateways."
+  echo "Runs: ipsec down azure-gw1"
+  echo "      ipsec down azure-gw2"
+  exit 0
+fi
+
+COMMAND_TO_EXECUTE_1="ipsec down azure-gw1"
+
+echo "Bringing down IPsec connection to Azure Gateway 1:"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE_1"
+echo "#########################################################################"
+
+# Execute the first command
+eval "$COMMAND_TO_EXECUTE_1"
+
+echo
+COMMAND_TO_EXECUTE_2="ipsec down azure-gw2"
+
+echo "Bringing down IPsec connection to Azure Gateway 2:"
+echo "#########################################################################"
+echo "$COMMAND_TO_EXECUTE_2"
+echo "#########################################################################"
+
+# Execute the second command
+eval "$COMMAND_TO_EXECUTE_2"
