@@ -1,0 +1,28 @@
+# Forward ALL Azure SQL Database queries to Azure DNS Resolver
+# This includes both *.database.windows.net and *.privatelink.database.windows.net
+server=/database.windows.net/10.82.5.4
+server=/privatelink.database.windows.net/10.82.5.4
+server=/file.core.windows.net/10.82.5.4
+server=/privatelink.file.core.windows.net/10.82.5.4
+server=/openai.azure.com/10.82.5.4
+server=/privatelink.openai.azure.com/10.82.5.4
+
+
+# All other queries are forwarded to Google DNS
+server=8.8.8.8
+server=8.8.4.4
+
+# Do not read /etc/resolv.conf
+no-resolv
+
+# Listen on all interfaces (including VPN tunnel for "backward" DNS resolution)
+listen-address=127.0.0.1
+listen-address=192.168.1.157  # IP of our VPN/DNS device (e.g. our not-so-expensive Linux server) in the local network
+
+# Enable logging for debugging (optional)
+log-queries
+log-facility=/opt/log/dnsmasq.log
+
+#################################################
+# Copy this file to  /etc/dnsmasq.d directory  #
+#################################################
